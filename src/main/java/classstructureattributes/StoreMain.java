@@ -9,5 +9,14 @@ public class StoreMain {
         System.out.println("Product name: ");
         String name = scanner.nextLine();
         store.setProduct(name);
+        System.out.println("Book title: " + store.getProduct() + "  Store: " + store.getStock());
+        System.out.println("Plus: ");
+        int num = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Storage:" + store.store(num));
+        System.out.println("Minus: ");
+        num = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Storage:" + store.dispatch(num));
     }
 }
