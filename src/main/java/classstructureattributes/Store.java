@@ -2,8 +2,8 @@ package classstructureattributes;
 
 public class Store {
 
-    String product;
-    int stock;
+    private String product;
+    private int stock;
 
     public void setProduct (String product) {
         this.product = product;
