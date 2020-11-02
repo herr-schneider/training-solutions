@@ -16,6 +16,6 @@ public class LocalVariablesMain {
             System.out.println(a);
             int x = 0;
         }
-        System.out.println(x);
+
 
     }}
