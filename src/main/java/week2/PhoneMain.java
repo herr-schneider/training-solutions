@@ -15,9 +15,12 @@ public class PhoneMain {
        Phone phone = new Phone(type, mem);
 
         System.out.println("Tipus2: ");
-        Scanner scanner = new Scanner(System.in);
-        String type = scanner.nextLine();
+        type = scanner.nextLine();
         System.out.println("Mem meret2: ");
-        int mem = scanner.nextInt();
+        mem = scanner.nextInt();
         Phone phoneother = new Phone(type, mem);
+
+        System.out.println("Telefon tipusa:" + phone.getType() + "Mem merete:" + phone.getMem());
+        System.out.println("Telefon tipusa2:" + phoneother.getType() + "Mem merete:" + phoneother.getMem());
+
     }}
