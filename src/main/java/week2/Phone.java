@@ -1,8 +1,8 @@
 package week2;
 
 public class Phone {
-    String type;
-    int mem;
+    private String type;
+    private int mem;
 
 
     public String getType() {
