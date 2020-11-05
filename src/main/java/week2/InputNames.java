@@ -14,7 +14,7 @@ public class InputNames {
             names[i] = name;
         }
         int j;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < names.length; i++) {
             j = i + 1;
             System.out.println(j + ".Name" + i + ": "); //  System.out.println((i+1) + ".Name" + i + ": ");
             System.out.println(names[i]);
