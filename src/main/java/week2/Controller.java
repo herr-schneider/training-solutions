@@ -50,61 +50,52 @@ public class Controller {
             for (String points : office.printNames()) {
                 System.out.println(points);
             }
-        } else {
-            if (chosen.equals("2")) {
-                for (String points : office.printNamesReverse()) {
-                    System.out.println(points);
-                }
-            } else {
-                if (chosen.equals("3")) {
-                    for (String points : office.printEventNames()) {
-                        System.out.println(points);
-                    }
-                } else {
-                    if (chosen.equals("4")) {
-                        for (String points : office.printAreas()) {
-                            System.out.println(points);
-                        }}
-                }
+        }
+        if (chosen.equals("2")) {
+            for (String point3 : office.printNamesReverse()) {
+                System.out.println(point3);
             }
-            /* case "3": {
-                for (String points : office.printEventNames()) {
-                    System.out.println(points);
-                }
-            }
-                default: {
-                    System.out.println("Hülye vagy");}
-            case 4:{
-                return office.printAreas();
-            }
-            case 5:{
-                Scanner scanner = new Scanner(System.in);
-                System.out.println("Search full:");
-                String full = scanner.nextLine();
-                return office.printMeetingRoomsWithName(full);
-            }
-            case 6:{
-                Scanner scanner = new Scanner(System.in);
-                System.out.println("Search part:");
-                String part = scanner.nextLine();
-                return office.printMeetingRoomContainsWithName(part);
-            }
-            case 7:{
-                Scanner scanner = new Scanner(System.in);
-                System.out.println("Please write the minimum area:");
-                int minimumArea = scanner.nextInt();
-                scanner.nextLine();
-                return office.printAreasLargerThan(minimumArea);
-            }
+        }
 
-            default:{
-                String[] output = {"Adam", "Eve", "Jonathan"};
-                List<String> outList = Arrays.asList(output);
-                return outList;
-            } */
+        if (chosen.equals("3")) {
+            for (String point2 : office.printEventNames()) {
+                System.out.println(point2);
+            }
+        }
+
+        if (chosen.equals("4")) {
+            for (int points : office.printAreas()) {
+                System.out.println(points);
+            }
+        }
+
+        if (chosen.equals("5")) {
+            System.out.println("Search full:");
+            String full = scanner.nextLine();
+            for (String fullSearch : office.printMeetingRoomsWithName(full)) {
+                System.out.println(fullSearch);
+            }
+        }
+
+        if (chosen.equals("6")) {
+            System.out.println("Search full:");
+            String part = scanner.nextLine();
+            for (String partSearch : office.printMeetingRoomContainsWithName(part)) {
+                System.out.println(partSearch);
+            }
+        }
+
+        if (chosen.equals("7")) {
+            System.out.println("Please write the minimum area:");
+            int minimumArea = scanner.nextInt();
+            scanner.nextLine();
+            for (String largerArea : office.printAreasLargerThan(minimumArea)) {
+                System.out.println(largerArea);
+            }
+        }
 
         }
-    }}
+    }
 
 
 
