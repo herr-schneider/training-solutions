@@ -11,52 +11,66 @@ public class Office {
 
     }
 
-    public void printNames() {
+    public List<String> printNames() {
+        List data = new ArrayList();
         for (MeetingRoom room : meetingRooms) {
-            System.out.println(room.getName());
+            data.add(room.getName());
         }
+        return data;
     }
 
-    public void printNamesReverse() {
+    public List<String> printNamesReverse() {
+        List output = new ArrayList();
         for (int i = meetingRooms.size(); i > 1; i--) {
-            System.out.println(meetingRooms.get(i).getName());
+            output.add(meetingRooms.get(i).getName());
         }
+        return output;
     }
-    public void printEventNames() {
+    public List<String> printEventNames() {
+        List output = new ArrayList();
         for (int i = 1; i > meetingRooms.size(); i++) {
             if (i % 2 == 0) {
-                System.out.println(meetingRooms.get(i).getName());
+                output.add(meetingRooms.get(i).getName());
             }
         }
+        return output;
     }
 
-    public void printAreas() {
+    public List<String> printAreas() {
+        List output = new ArrayList();
             for (MeetingRoom room : meetingRooms) {
-                System.out.println(room.getArea());
+                output.add(room.getArea());
             }
+            return output;
         }
 
-    public void printAreasLargerThan(int area) {
+    public List<String> printAreasLargerThan(int area) {
+        List output = new ArrayList();
         for (MeetingRoom room : meetingRooms) {
             if (room.getArea() > area) {
-                System.out.println(room.getName());
+                output.add(room.getName());
             }
         }
+        return output;
     }
 
-    public void printMeetingRoomsWithName(String name) {
+    public List<String> printMeetingRoomsWithName(String name) {
+        List output = new ArrayList();
         for (MeetingRoom room : meetingRooms) {
             if (room.getName().equals(name)) {
-                System.out.println(room.getName());
+                output.add(room.getName());
             }
         }
+        return output;
     }
 
-    public void printMeetingRoomContainsWithName(String part) {
+    public List<String> printMeetingRoomContainsWithName(String part) {
+        List output = new ArrayList();
         for (MeetingRoom room : meetingRooms) {
             if (room.getName().indexOf(part) > -1) {
-                System.out.println(room.getName());
+               output.add(room.getName());
             }
         }
+        return output;
     }
 }

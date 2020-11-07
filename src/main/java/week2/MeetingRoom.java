@@ -4,7 +4,7 @@ public class MeetingRoom {
     private String name;
     int length, width;
 
-    public MeetingRoom(String name, int length, int width) {
+    public MeetingRoom(String name, int width, int length) {
         this.name = name;
         this.length = length;
         this.width = width;
