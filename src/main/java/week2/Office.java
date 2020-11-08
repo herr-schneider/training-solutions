@@ -28,7 +28,7 @@ public class Office {
     }
     public List<String> printEventNames() {
         List output = new ArrayList<>();
-        for (int i = 1; i > meetingRooms.size(); i = i + 2) {
+        for (int i = 1; i < meetingRooms.size(); i = i + 2) {
             output.add(meetingRooms.get(i).getName());
         }
         return output;
