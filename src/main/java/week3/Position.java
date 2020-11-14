@@ -45,7 +45,7 @@ public class Position {
         positions.add(new Position("director", 60000)); */
 
         for (Position position : positions) {
-            if (position.getBonus() > 100000){
+            if (position.getBonus() >= 100000){
                 System.out.println(position.getName());
             }
         }
