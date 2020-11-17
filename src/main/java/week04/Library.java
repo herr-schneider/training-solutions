@@ -23,16 +23,7 @@ public class Library {
 
     }
     public void loadFromFile() {
-        try (Scanner scanner = new Scanner(Library.class.getResourceAsStream("/books.csv"))) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] names = line.split(";");
-                int year = Integer.parseInt(names[3]);
-                Book newBook = new Book(names[0], names[1], names[2], year);
-                addBooks(newBook);
-            }
-        }
-
+        loadFromAnyFile("/books.csv");
     }
 
     public List<Book> getBooks () {
