@@ -3,7 +3,7 @@ package week04;
 import java.util.Random;
 import java.util.Scanner;
 
-public class numberGuesser {
+public class NumberGuesser {
     public static void main(String[] args) {
         int randomNum = new Random().nextInt(100)+1;
         System.out.println(randomNum);
