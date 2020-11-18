@@ -8,10 +8,11 @@ public class numberGuesser {
         int randomNum = new Random().nextInt(101);
         System.out.println(randomNum);
         boolean ok = false;
-        int num = 0;
+        int num, triing = 0;
         Scanner scanner = new Scanner(System.in);
-        while (!ok) {
-            System.out.println("Szám:");
+        while (!ok || triing ==4 ) {
+            triing ++;
+            System.out.println(triing + ". próbálkozás. Szám:");
             num = scanner.nextInt();
             scanner.nextLine();
             if (num == randomNum) {
