@@ -5,12 +5,12 @@ import java.util.Scanner;
 
 public class numberGuesser {
     public static void main(String[] args) {
-        int randomNum = new Random().nextInt(101);
+        int randomNum = new Random().nextInt(100)+1;
         System.out.println(randomNum);
         boolean ok = false;
         int num, triing = 0;
         Scanner scanner = new Scanner(System.in);
-        while (!ok || triing ==4 ) {
+        while (!ok && triing < 4 ) {
             triing ++;
             System.out.println(triing + ". próbálkozás. Szám:");
             num = scanner.nextInt();
