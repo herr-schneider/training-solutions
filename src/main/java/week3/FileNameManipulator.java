@@ -27,16 +27,16 @@ public class FileNameManipulator {
         if (ext == null || ext.isBlank()) {
             throw new IllegalArgumentException("Invalid argument!");
         }
-        if (fileName == null || ext.equals(".")) {
+        if (ext.equals(".")) {
             throw new IllegalArgumentException("Empty string!");}
-        if (fileName.equalsIgnoreCase(".d") || ext.equals(".") || fileName.isBlank()) {
+        if (fileName == null || fileName.equalsIgnoreCase(".d") || ext.equals(".") || fileName.isBlank()) {
             throw new IllegalArgumentException("Invalid argument!");
         }
 
         if (fileName.lastIndexOf('.') < 1 || (fileName.lastIndexOf('.') == fileName.length() - 1)) {
             throw new IllegalArgumentException("Invalid argument!");
         }
-        return findFileExtension(fileName).equalsIgnoreCase(ext);
+        return fileName.substring(fileName.indexOf(".")+1, fileName.length()).equalsIgnoreCase(ext);
     }
 
     public boolean compareFilesByName(String searchedFileName, String actualFileName) {
@@ -54,8 +54,10 @@ public class FileNameManipulator {
             throw new IllegalArgumentException("Invalid argument!");
         }
         // fileName == ".java" || findFileExtension(fileName).equals(".") ||
-        String[] = fileName.indexOf(".");
-        throw new IllegalArgumentException("Invalid argument!");
+        // throw new IllegalArgumentException("Invalid argument!");
+
+        String[] str = fileName.split("\\.");
+        return str[0] + "." + str[1].toLowerCase();
 
     }
 
@@ -64,14 +66,5 @@ public class FileNameManipulator {
             throw new IllegalArgumentException("Empty string!");
         }
         return fileName.replace(present, target);
-    }
-
-    public static void main(String[] args) {
-        //FileNameManipulator f = new FileNameManipulator();
-        //System.out.println(f.changeExtensionToLowerCase("String.JAVA"));
-        //String[] str = "String.JAVA".split(".");
-
-        String[] words = "String.JAVA.kou.hgr".split(".");
-        System.out.println(words[0]);
     }
 }
