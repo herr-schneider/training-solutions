@@ -65,7 +65,7 @@ public class ClassRecords {
             div++;
         }
         if (avg == 0) throw new ArithmeticException("No marks present, average calculation aborted!");
-        return avg/div;
+        return Math.round((avg/div)*100.0)/100.0;
     }
 
     public double calculateClassAverageBySubject(Subject subject) {//tantárgy szerinti osztályátlagot számol,
@@ -80,7 +80,7 @@ public class ClassRecords {
                 }
             }
         }
-        return avg/div;
+        return Math.round((avg/div)*100.0)/100.0;
     }
 
     public Student findStudentByName(String name) {// név szerint megkeres egy diákot az osztályban
