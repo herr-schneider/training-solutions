@@ -3,18 +3,15 @@ package schoolrecords;
 public class Mark {
 
     Subject subject;
-    Tutor tudor;
+    Tutor tutor;
     MarkType mark;
 
-    public Mark(Subject subject, Tutor tudor, MarkType mark) {
+    public Mark(MarkType mark, Subject subject, Tutor tutor) {
+        if (mark == null || subject == null || tutor == null) {
+            throw new NullPointerException("Both subject and tutor must be provided!");
+        }
         this.subject = subject;
-        this.tudor = tudor;
-        this.mark = mark;
-    }
-
-    public Mark(Subject subject, Tutor tudor, String mark) {
-        this.subject = subject;
-        this.tudor = tudor;
+        this.tutor = tutor;
         this.mark = mark;
     }
 
@@ -22,20 +19,16 @@ public class Mark {
         return subject;
     }
 
-    public Tutor getTudor() {
-        return tudor;
+    public Tutor getTutor() {
+        return this.tutor;
     }
 
-    public MarkType getMark() {
-        return mark;
+    public MarkType getMarkType() {
+        return this.mark;
     }
 
-    @Override
+    @Override //"excellent(5)"
     public String toString() {
-        return "Mark{" +
-                "subject=" + subject +
-                ", tudor=" + tudor +
-                ", mark=" + mark +
-                '}';
+        return mark.toString();
     }
 }

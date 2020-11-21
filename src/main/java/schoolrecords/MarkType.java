@@ -23,4 +23,11 @@ public enum MarkType {
     public String getWithWords() {
         return withWords;
     }
+
+    @Override
+    public String toString() {
+        return withWords + "(" + withNumber + ")";
+    }
+
 }
+

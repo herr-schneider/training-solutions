@@ -1,19 +1,27 @@
 package schoolrecords;
 
 public class StudyResultByName {
- private String nameOf;
+ private String studentName;
  private double averageOfMarks;
 
-    public StudyResultByName(String nameOf, double averageOfMarks) {
-        this.nameOf = nameOf;
+    public StudyResultByName(String studentName, double averageOfMarks) {
+        this.studentName = studentName;
         this.averageOfMarks = averageOfMarks;
     }
 
-    public String getNameOf() {
-        return nameOf;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public double getAverageOfMarks() {
+    public double getStudyAverage() {
         return averageOfMarks;
+    }
+
+    public void setNameOf(String nameOf) {
+        this.studentName = nameOf;
+    }
+
+    public void setAverageOfMarks(double averageOfMarks) {
+        this.averageOfMarks = averageOfMarks;
     }
 }

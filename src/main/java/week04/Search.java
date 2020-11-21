@@ -2,6 +2,7 @@ package week04;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Search {
 
@@ -13,5 +14,16 @@ public class Search {
             }
         }
         return result;
+    }
+
+    public static void main(String[] args) {
+        Search s = new Search();
+        Scanner scanner = new Scanner(System.in);
+        String str = scanner.nextLine();
+        char c = scanner.nextLine().charAt(0);
+        List<Integer> posOfChar = s.getIndexOfChar(str, c);
+        for (int i = 0; i < posOfChar.size(); i++) {
+            System.out.println(posOfChar.get(i));
+        }
     }
 }

@@ -18,10 +18,10 @@ public class Tutor {
 
     public boolean tutorTeachingSubject (Subject subject) {
         for (Subject taughtSubject : taughtSubjects) {
-            if (taughtSubject == subject) {
-                return true;
+            if (taughtSubject.equals(subject)) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 }
