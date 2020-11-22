@@ -102,6 +102,14 @@ public class ClassRecordsTest {
     }
 
     @Test
+    public void testCalculateClassAverageBySubjectReal() {
+        //Given
+        Subject geography = new Subject("földrajz");
+        //Then
+        assertEquals(3.0, classRecords.calculateClassAverageBySubjectReal(geography));
+    }
+
+    @Test
     public void emptyStudentNameShouldThrowException() throws IllegalArgumentException {
         Exception ex = assertThrows(IllegalArgumentException.class, () -> classRecords.findStudentByName(""));
         assertEquals("Student name must not be empty!", ex.getMessage());

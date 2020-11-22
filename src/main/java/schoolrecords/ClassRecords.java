@@ -68,7 +68,7 @@ public class ClassRecords {
         return Math.round((avg/div)*100.0)/100.0;
     }
 
-    public double calculateClassAverageBySubject(Subject subject) {//tantárgy szerinti osztályátlagot számol,
+    public double calculateClassAverageBySubjectReal(Subject subject) {//tantárgy szerinti osztályátlagot számol,
         // kihagyja azon diákokat, akiknek az adott tantárgyból nincs jegye
         double avg = 0.0;
         double div = 0.0;
@@ -80,6 +80,20 @@ public class ClassRecords {
                 }
             }
         }
+        return Math.round((avg/div)*100.0)/100.0;
+    }
+
+    public double calculateClassAverageBySubject(Subject subject) {//tantárgy szerinti osztályátlagot számol,
+        // kihagyja azon diákokat, akiknek az adott tantárgyból nincs jegye
+        double avg = 0.0;
+        double div = 0.0;
+        for (Student student : studentsOfClass) {
+            avg = avg + student.calculateSubjectAverage(subject);
+            if (student.calculateSubjectAverage(subject) != 0) {
+                    div++;
+                }
+            }
+
         return Math.round((avg/div)*100.0)/100.0;
     }
 

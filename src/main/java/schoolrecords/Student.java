@@ -43,8 +43,15 @@ public class Student {
     public double calculateSubjectAverage(Subject subject) {// tantárgyhoz tartozó átlag számítása
         double avg = 0;
         double div = 0;
+        //for (Mark mark : student.getMarkOfStudent()) {
+        //                if (mark.getSubject().getSubjectName().equals(subject.getSubjectName())) {
+        //                    avg = avg + mark.getMarkType().getWithNumber();
+        //                    div++;
+        //                }
+        //            }
+
         for (Mark mark : markOfStudent) {
-            if (subject.equals(mark.getSubject())) {
+            if (mark.getSubject().getSubjectName().equals(subject.getSubjectName())) {
                 avg = avg + mark.getMarkType().getWithNumber();
                 div++;
             }
@@ -52,7 +59,7 @@ public class Student {
         if (div == 0.0) {
             return div;
         }
-        return avg/div;
+        return Math.round((avg / div) * 100.0) / 100.0;
     }
 
     public String toString(){
