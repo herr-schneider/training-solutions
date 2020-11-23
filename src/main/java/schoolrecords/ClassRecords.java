@@ -80,6 +80,7 @@ public class ClassRecords {
                 }
             }
         }
+        if (div == 0.0) {return 0.0;}
         return Math.round((avg/div)*100.0)/100.0;
     }
 

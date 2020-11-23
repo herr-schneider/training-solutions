@@ -84,7 +84,7 @@ public class SchoolRecordsController {
                 }
             }
                 if (i == 4) {
-                    System.out.println("Please enter new student's name:");
+                    System.out.println("Please enter deletable student's name:");
                     try {
                         if (classRecords.removeStudent(new Student(keyboardReader.nextLine()))) {
                             System.out.println("Done.");
@@ -96,9 +96,32 @@ public class SchoolRecordsController {
                     }
 
                 }
+            if (i == 5) {
+                System.out.println("The Winner is "+ classRecords.repetition().getName());
             }
+
+            if (i == 6) {
+                System.out.println("The average of Class is "+ classRecords.calculateClassAverage());
+            }
+
+            if (i == 7) {
+                System.out.println("Please subject's name:");
+                double d = classRecords.calculateClassAverageBySubjectReal(new Subject(keyboardReader.nextLine()));
+                if (d == 0.0) {
+                    System.out.println("There is no subject!");
+                } else if (d != 0.0) {System.out.println(d);}
+            }
+            if (i == 9) {
+                System.out.println("Please student's name:");
+                double d = classRecords.findStudentByName(keyboardReader.nextLine()).calculateAverage();
+                if (d == 0.0) {
+                    System.out.println("There is no student!");
+                } else if (d != 0.0) {System.out.println(d);}
+            }
+
         }
     }
+   }
 
 
 
