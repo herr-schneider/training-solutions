@@ -129,7 +129,7 @@ public class ClassRecords {
             index++;
             } */
 
-        for (int index = 0; index < studentsOfClass.size(); index++) {
+        for (int index = 0; index < studentsOfClass.size()-1; index++) {
             StudyResultByName srbn = new StudyResultByName(studentsOfClass.get(index).getName(), studentsOfClass.get(index).calculateAverage());
             studyResultByNames.add(srbn);
            }
