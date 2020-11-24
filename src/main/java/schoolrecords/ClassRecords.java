@@ -84,6 +84,24 @@ public class ClassRecords {
         return Math.round((avg/div)*100.0)/100.0;
     }
 
+    public double calculateStudentAverageBySubjectReal(String studentName, String subjectName) {//tantárgy szerinti osztályátlagot számol,
+        // kihagyja azon diákokat, akiknek az adott tantárgyból nincs jegye
+        double avg = 0.0;
+        double div = 0.0;
+        for (Student student : studentsOfClass) {
+            if (student.getName().equals(studentName)) {
+                for (Mark mark : student.getMarkOfStudent()) {
+                    if (mark.getSubject().getSubjectName().equals(subjectName)) {
+                        avg = avg + mark.getMarkType().getWithNumber();
+                        div++;
+                    }
+                }
+            }
+        }
+        if (div == 0.0) {return 0.0;}
+        return Math.round((avg/div)*100.0)/100.0;
+    }
+
     public double calculateClassAverageBySubject(Subject subject) {//tantárgy szerinti osztályátlagot számol,
         // kihagyja azon diákokat, akiknek az adott tantárgyból nincs jegye
         double avg = 0.0;
@@ -129,7 +147,7 @@ public class ClassRecords {
             index++;
             } */
 
-        for (int index = 0; index < studentsOfClass.size()-1; index++) {
+        for (int index = 0; index < studentsOfClass.size(); index++) {
             StudyResultByName srbn = new StudyResultByName(studentsOfClass.get(index).getName(), studentsOfClass.get(index).calculateAverage());
             studyResultByNames.add(srbn);
            }

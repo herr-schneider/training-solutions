@@ -111,13 +111,13 @@ public class SchoolRecordsController {
                     System.out.println("There is no subject!");
                 } else if (d != 0.0) {System.out.println(d);}
             }
-            /* if (i == 8) {
+
+            if (i == 8) {
                 System.out.println("Students' averages:");
-                StudyResultByName temp = classRecords.listStudyResults();
-                if (d == 0.0) {
-                    System.out.println("There is no student!");
-                } else if (d != 0.0) {System.out.println(d);}
-            } */
+                for (StudyResultByName studyResultByName : classRecords.listStudyResults()) {
+                    System.out.println(studyResultByName.getStudentName() + " " + studyResultByName.getStudyAverage());
+                }
+            }
 
             if (i == 9) {
                 System.out.println("Please student's name:");
@@ -127,6 +127,17 @@ public class SchoolRecordsController {
                 } else if (d != 0.0) {System.out.println(d);}
             }
 
+            if (i == 10) {
+                System.out.println("Please student's name:");
+                String student = keyboardReader.nextLine();
+                System.out.println("Please name of subject:");
+                String subject = keyboardReader.nextLine();
+
+                double d = classRecords.calculateStudentAverageBySubjectReal(student, subject);
+                if (d == 0.0) {
+                    System.out.println("Unknown error(s)!");
+                } else if (d != 0.0) {System.out.println(d);}
+            }
         }
     }
    }
