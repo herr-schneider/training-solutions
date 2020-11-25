@@ -8,16 +8,23 @@ import java.util.List;
 
 
         public void registerSatellite(Satellite satellite) {
+            if (satellite == null) {
+                throw new NullPointerException("Parameter must not be null!");}
             satellites.add(satellite);
         }
 
         public Satellite findSatelliteByRegisterIdent (String registerIdent) {
-            for (Satellite findSatellite : satellites) {
-                if (findSatellite.getRegisterIdent() == registerIdent) {
-                    return findSatellite;
+            if (registerIdent == null) {
+                throw new IllegalArgumentException("Satellite with the given registration cannot be found!" + registerIdent);}
+
+                for (Satellite findSatellite : satellites) {
+                    if (findSatellite.getRegisterIdent().equals(registerIdent)) {
+                        return findSatellite;
+                    }
                 }
-            }
-            return new Satellite(new CelestialCoordinates(0,0,0),null);
+
+
+            throw new IllegalArgumentException("Satellite with the given registration cannot be found!" + registerIdent);
         }
 
         private boolean isEmpty(String str){
@@ -27,6 +34,11 @@ import java.util.List;
             }
             else {reply = false;}
             return reply;
+        }
+
+        @Override
+        public String toString() {
+            return ""+satellites;
         }
     }
 
