@@ -21,7 +21,7 @@ public class ListCounter {
         int outPutInt = 0;
         if (inputList.size() < 1 && throwException) {throw new ArrayStoreException("Empty List!");};
         for (String underExamination : inputList) {
-            if (underExamination.charAt(0) == c || underExamination.toLowerCase().charAt(0) == c) {
+            if (c == underExamination.charAt(0) || underExamination.toLowerCase().charAt(0) == c) {
                 outPutInt++;
             }
         }
@@ -31,7 +31,7 @@ public class ListCounter {
 
     @Test
     public void testsitution(){
-        List<String> testList = Arrays.asList("Alma", "Korte", "avocado", "kukorica", "abanán");
+        List<String> testList = Arrays.asList("Alma", "Korte", "avocado", "kukorica", "abanán", "málna");
         assertEquals(3, counter(testList, c, false));
     }
 
