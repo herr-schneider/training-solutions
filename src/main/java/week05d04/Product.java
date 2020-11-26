@@ -3,8 +3,8 @@ package week05d04;
 import java.time.LocalDate;
 
 public class Product {
-    String name;
-    LocalDate bestBefore;
+    private String name;
+    private LocalDate bestBefore;
 
     public Product(String name, int year, int month, int day) {
         if (name == null || name.isEmpty() || name.isBlank()){throw new IllegalArgumentException("Empty name!");}

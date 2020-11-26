@@ -5,30 +5,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Store {
-    List<Product> productList = new ArrayList<>();
-
-    private Store(List<Product> productList) {
-        this.productList = productList;
-    }
+    private List<Product> productList = new ArrayList<>();
 
     public boolean addProduct(String name, int year, int month, int day) {
         for (Product oldProduct : productList) {
-            if (isValid(oldProduct) && oldProduct.isExpired()) {
+            if (!isThere(oldProduct) && !oldProduct.isExpired()) {
                 return false;
             }
-            LocalDate today = LocalDate.now();
         }
         productList.add(new Product(name, year, month, day));
         return true;
     }
 
-    public boolean isValid(Product product){
+    public boolean isThere(Product product){
         for (Product oldProduct : productList) {
             if (oldProduct.getName().equals(product.getName())) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public int getNumberOfExpired() {
@@ -39,5 +34,9 @@ public class Store {
             }
         }
         return num;
+    }
+
+    public List<Product> getProductList (){ // only for test purpose
+        return productList;
     }
 }
