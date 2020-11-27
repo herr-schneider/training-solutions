@@ -35,7 +35,7 @@ public class User {
 
     private boolean isEmailOk (String toBeChecked) {
 
-        if (isEmpty(toBeChecked) || toBeChecked.indexOf('@')< 1 || toBeChecked.indexOf(".") < 3){
+        if (isEmpty(toBeChecked) || !email.contains("@") || !email.contains(".") || toBeChecked.indexOf('@')< 1 || toBeChecked.indexOf(".") < 3){
             return false;
         }
         return true;
