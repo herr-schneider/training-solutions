@@ -34,6 +34,12 @@ public class PlayList {
       return lengthGraterThan;
     }
 
+    public void listToString (){
+        for (Song song : playList) {
+            System.out.println(song.toString());
+        }
+    }
+
     public List<Song> getPlayList() { // only for test purpose
         return playList;
     }

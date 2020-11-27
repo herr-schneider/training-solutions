@@ -31,4 +31,10 @@ public class PlayListTest {
         Exception ex = assertThrows(ArrayStoreException.class, () -> testPlayList.findByLengthGreaterThan(6));
         Assertions.assertEquals("Empty list! No songs on it!", ex.getMessage());
     }
+    @Test
+    public  void listToString() {
+            testPlayList.listToString();
+
+    }
+
 }
