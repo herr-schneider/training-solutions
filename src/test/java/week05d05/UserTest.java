@@ -25,6 +25,7 @@ public class UserTest {
     public void goodNameAndEmail() {
         assertEquals("Szabó Ferenc", new User("Szabó", "Ferenc", "szabofer@yahoo.com").getFullName());
     }
+    @Test
     public void aBitWrongEmailShouldThrowException() throws IllegalArgumentException {
         Exception ex = assertThrows(IllegalArgumentException.class, () -> new User("Szabo", "Feri", "y@."));
         assertEquals("Invalid Email!", ex.getMessage());
