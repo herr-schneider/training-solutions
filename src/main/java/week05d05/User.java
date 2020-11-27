@@ -12,13 +12,12 @@ public class User {
         if (isEmpty(email) || !isEmailOk(email)) {
             throw new IllegalArgumentException("Invalid Email!");
         }
-
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
 
-    public String getName() {
+    public String getFullName() {
         return firstName + " " + lastName;
     }
 
