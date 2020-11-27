@@ -22,9 +22,13 @@ public class UserTest {
     }
 
     @Test
-    public void goodNameAndEmail() {
-        assertEquals("Szabó Ferenc", new User("Szabó", "Ferenc", "szabofer@yahoo.com").getFullName());
+    public void goodNameAndEmail() { //Given When Then
+
+        User u = new User("Szabó", "Ferenc", "szabofer@yahoo.com");
+        assertEquals(new StringBuilder("Szabó Ferenc").toString(), u.getFullName().toString());
+        assertEquals( true, u.doesEmailContain("szabofer@yahoo.com"));
     }
+
     @Test
     public void aBitWrongEmailShouldThrowException() throws IllegalArgumentException {
         Exception ex = assertThrows(IllegalArgumentException.class, () -> new User("Szabo", "Feri", "y@."));

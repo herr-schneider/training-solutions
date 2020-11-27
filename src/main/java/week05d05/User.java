@@ -17,8 +17,8 @@ public class User {
         this.email = email;
     }
 
-    public String getFullName() {
-        return firstName + " " + lastName;
+    public StringBuilder getFullName() {
+        return new StringBuilder().append(firstName).append(" ").append(lastName); //firstName + " " + lastName;
     }
 
     @Override
@@ -34,11 +34,17 @@ public class User {
     }
 
     private boolean isEmailOk (String toBeChecked) {
-
-        if (isEmpty(toBeChecked) || !email.contains("@") || !email.contains(".") || toBeChecked.indexOf('@')< 1 || toBeChecked.indexOf(".") < 3){
+        if (!toBeChecked.substring(toBeChecked.indexOf("@")+1).contains(".")) {return false;}
+        if (isEmpty(toBeChecked) ||  toBeChecked.indexOf('@')< 1 || toBeChecked.indexOf(".") < 3 ){
             return false;
         }
         return true;
     }
 
+    public boolean doesEmailContain (String toBeChecked) {
+        if (toBeChecked.contains("@") || toBeChecked.contains(".")) {
+            return true;
+        }
+        return false;
+    }
 }
