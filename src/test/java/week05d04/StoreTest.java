@@ -34,7 +34,7 @@ public class StoreTest {
     public void numberOfExpiredProduct() {
         for (Product testProduct : store.getProductList()) {
             System.out.println(testProduct.getName());
-           // System.out.println(testProduct.getBestBefore() + " " + LocalDate.now());
+            // System.out.println(testProduct.getBestBefore() + " " + LocalDate.now());
         }
         System.out.println(store);
         assertEquals(2, store.getNumberOfExpired());
