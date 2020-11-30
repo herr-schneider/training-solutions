@@ -45,13 +45,17 @@ public class ClassRecords {
         if (remStudent == null) {
                 throw new IllegalArgumentException("Empty string!");
             }
-            for (Student studentAlready : studentsOfClass) {
+        for (Student studentAlready : studentsOfClass) {
                 if (studentAlready.getName().equals(remStudent.getName())) {
-                    studentsOfClass.remove(remStudent);
-                    return true;
+                    return delStudent(remStudent); // átrakni a cikluson kivülre studentsOfClass.remove(remStudent)
                 }
             }
-                return false;
+        return false;
+        }
+
+        public boolean delStudent (Student student) {
+        studentsOfClass.remove(student);
+        return true;
         }
 
     public double calculateClassAverage(){ //osztályátlagot számol, minden diákot figyelembe véve
