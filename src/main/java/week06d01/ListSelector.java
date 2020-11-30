@@ -16,9 +16,9 @@ List<String> list = new ArrayList<>();
     }
 
     public String selector() {
-    if (list.size()<=1) {return "";}
+    if (list.size()<=1) {return "";} // if (list.size() != 0) {result.append(list.get(i)...}
     StringBuilder result = new StringBuilder("[");
-    for (int i = 0; i < list.size(); i++) {
+    for (int i = 0; i < list.size(); i++) { //for (int i = 0; i < list.size(); i+=2)
         if (i > 0 && i%2==0) {
             result.append(list.get(i)+ " ");
         }
