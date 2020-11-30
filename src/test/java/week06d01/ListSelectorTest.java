@@ -37,5 +37,11 @@ public class ListSelectorTest {
         test.create("");
         assertEquals("", test.selector());
     }
+
+    @Test
+    public void testCommaVararg() {
+        test.create("zero", "one", "two", "three", "four");
+        assertEquals("[two, four]", test.convert(test.selector()));
+    }
 }
 

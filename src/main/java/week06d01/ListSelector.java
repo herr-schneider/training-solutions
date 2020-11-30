@@ -36,4 +36,7 @@ List<String> list = new ArrayList<>();
         }
     }
 
+    public String convert(String str) {
+        return str.replace(" ", ", ");
+    }
 }
