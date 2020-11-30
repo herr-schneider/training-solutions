@@ -31,4 +31,11 @@ public class ListSelectorTest {
         test.create("zero", "one", "two", "three", "four");
         assertEquals("[two four]", test.selector());
     }
+
+    @Test
+    public void testZeroListVararg() {
+        test.create("");
+        assertEquals("", test.selector());
+    }
 }
+

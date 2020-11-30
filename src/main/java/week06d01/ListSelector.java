@@ -16,13 +16,13 @@ List<String> list = new ArrayList<>();
     }
 
     public String selector() {
+    if (list.size()<=1) {return "";}
     StringBuilder result = new StringBuilder("[");
     for (int i = 0; i < list.size(); i++) {
         if (i > 0 && i%2==0) {
             result.append(list.get(i)+ " ");
         }
     }
-
     result.replace(result.length()-1,result.length(),"]");
     return result.toString();
     }
