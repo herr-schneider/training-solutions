@@ -45,12 +45,16 @@ public class ClassRecords {
         if (remStudent == null) {
                 throw new IllegalArgumentException("Empty string!");
             }
+        Student found = new Student();
+        boolean result = false;
         for (Student studentAlready : studentsOfClass) {
                 if (studentAlready.getName().equals(remStudent.getName())) {
-                    return delStudent(remStudent); // átrakni a cikluson kivülre studentsOfClass.remove(remStudent)
+                    found = remStudent; // átrakni a cikluson kivülre studentsOfClass.remove(remStudent)
+                    result = true;
                 }
             }
-        return false;
+        if (result == true) {delStudent(found);}
+        return result;
         }
 
         public boolean delStudent (Student student) {

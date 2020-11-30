@@ -14,6 +14,16 @@ public class Student {
         this.nameOf = nameOf;
         }
 
+    public Student() {}
+
+    public void setNameOf(String nameOf){
+        if (nameOf == null || nameOf.isBlank()) {
+            throw new IllegalArgumentException("Student name must not be empty!");
+        }
+        this.nameOf = nameOf;
+    }
+
+
     public String getName(){
         return nameOf;
     }
