@@ -1,0 +1,52 @@
+package methodchain.robot;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Robot {
+    private int distance;
+    private int azimut;
+    private List<Robot> navigationList = new ArrayList<>();
+
+
+
+    public Robot() {}
+
+    private Robot(int distance, int azimut) {
+        this.distance = distance;
+        this.azimut = azimut;
+    }
+
+    public Robot go(int meter){
+        this.distance = this.distance + meter;
+        return this;
+    }
+
+    public Robot rotate(int angle){
+        this.azimut = this.azimut + angle;
+        return this;
+    }
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public int getAzimut() {
+        return azimut;
+    }
+
+    public List<Robot> getNavigationList() {
+        return navigationList;
+    }
+
+    public Robot registerNavigationPoint() {
+        new Robot(distance, azimut);
+        navigationList.add(new Robot(distance, azimut));
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "distance: " + distance + " azimut: " + azimut;
+    }
+}
