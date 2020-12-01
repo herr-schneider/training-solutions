@@ -45,4 +45,17 @@ public class RobotTest {
         //Then
         assertEquals("[distance: 5 azimut: 45, distance: 15 azimut: 30]", robot.getNavigationList().toString());
     }
+
+    @Test
+    public void testActualCoordinates() {
+        //When
+        robot.go(10).rotate(45).actualCoordinates();
+        //Then
+        assertEquals(7.071, robot.getRobotCoordinates().getY());
+        assertEquals(7.071, robot.getRobotCoordinates().getX());
+        robot.go(10).rotate(45).actualCoordinates();
+        System.out.println(robot.getRobotCoordinates().getX());
+        System.out.println(robot.getRobotCoordinates().getY());
+
+    }
 }

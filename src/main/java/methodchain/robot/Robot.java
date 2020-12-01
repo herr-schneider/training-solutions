@@ -7,6 +7,7 @@ public class Robot {
     private int distance;
     private int azimut;
     private List<Robot> navigationList = new ArrayList<>();
+    private RobotCoordinates robotCoordinates = new RobotCoordinates(0.0,0.0);
 
 
 
@@ -45,6 +46,17 @@ public class Robot {
         return this;
     }
 
+    public Robot actualCoordinates(){
+        double azimutRad = Math.toRadians(azimut);
+        robotCoordinates = new RobotCoordinates(
+                Math.round((robotCoordinates.getX()+Math.cos(azimutRad)*distance)*1000)/1000.0,
+                Math.round((robotCoordinates.getY()+Math.sin(azimutRad)*distance)*1000)/1000.0);
+        return this;
+    }
+
+    public RobotCoordinates getRobotCoordinates(){
+        return robotCoordinates;
+    }
     @Override
     public String toString() {
         return "distance: " + distance + " azimut: " + azimut;
