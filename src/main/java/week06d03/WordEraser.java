@@ -6,7 +6,7 @@ public class WordEraser {
 
     public String eraseWord (String words, String word) {
         Scanner scanner = new Scanner(words);
-        scanner.useDelimiter(" ");
+        scanner.useDelimiter(" "); // nem kell, mert a space az alapértelmezett limiter
         StringBuilder strBuilder = new StringBuilder();
         String strStream;
         while (scanner.hasNext()) {
