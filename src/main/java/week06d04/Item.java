@@ -27,6 +27,9 @@ public class Item {
         return name;
     }
 
+    public boolean isOk(){
+        return month.isBefore(LocalDate.now());
+    }
     @Override
     public String toString() {
         return  "price=" + price + "\n" +
