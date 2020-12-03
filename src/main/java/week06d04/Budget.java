@@ -1,5 +1,6 @@
 package week06d04;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class Budget {
         }
     }
 
-    public Budget(String name, int month, int price) { // It could be: addItem
+    public Budget(String name, LocalDate month, int price) { // It could be: addItem
         list.add(new Item(price, month, name));
     }
 
@@ -30,4 +31,7 @@ public class Budget {
         return new ArrayList<>(found);
     }
 
+    public static void main(String[] args) {
+        System.out.println(LocalDate.now());
+    }
 }

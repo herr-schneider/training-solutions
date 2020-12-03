@@ -1,12 +1,14 @@
 package week06d04;
 
+import java.time.LocalDate;
+
 public class Item {
     private int price;
-    private final int month;
+    private final LocalDate month;
     private final String name;
 
-    public Item(int price, int month, String name) {
-        if (name == null || price<0 || month <1 || month > 12) {throw new IllegalArgumentException("Wrong input!");}
+    public Item(int price, LocalDate month, String name) {
+        if (name == null || price<0) {throw new IllegalArgumentException("Wrong input!");}
 
         this.price = price;
         this.month = month;
@@ -18,7 +20,7 @@ public class Item {
     }
 
     public int getMonth() {
-        return month;
+        return month.getMonthValue();
     }
 
     public String getName() {
