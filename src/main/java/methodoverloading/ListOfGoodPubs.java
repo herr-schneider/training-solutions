@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListOfGoodPubs {
-    List<Pub> goodPubs;
+    private List<Pub> goodPubs;
 
     public ListOfGoodPubs(List<Pub> goodPubs) {
         if (goodPubs.size()<1) {throw new IllegalArgumentException("Pub list is empty!");}
