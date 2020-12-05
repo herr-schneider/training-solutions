@@ -48,6 +48,7 @@ public class BankTransaction {
 
 
     public BankTransaction(long trxValue) {
+        if (trxValue < 0 || trxValue > 10000000) {throw new IllegalArgumentException("");};
         listOfTrx.add(trxValue);
         sumOfTransaction = sumOfTransaction.add(new BigDecimal(Long.toString(trxValue)));
         numOfTransaction++;
