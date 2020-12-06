@@ -1,19 +1,26 @@
 package initializer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CreditCard {
-    long balance;
+    private long balance;
+    private static List<Rate> rates = new ArrayList<>();
 
 
     public CreditCard(long balance, Currency currency, List<Rate> rates) {
-        double factor = 1;
+        this.rates = rates;
+        this.balance = (long) (balance*Converter(currency));
+    }
+
+    private double Converter(Currency currency){
+        double result = currency.getDefaultConversionFactor();
         for (Rate rate : rates) {
             if (rate.getCurrency() == currency) {
-                factor = rate.conversionFactor;
+                result = rate.conversionFactor;
             }
         }
-        this.balance = (long) (balance*factor);
+        return  result;
     }
 
     public CreditCard(long balance) {
@@ -26,8 +33,8 @@ public class CreditCard {
     }
 
     public boolean payment(long amount, Currency currency) {
-        if (amount*currency.getDefaultConversionFactor() > balance) {return false;}
-        balance = (long) (balance - amount*currency.getDefaultConversionFactor());
+        if (amount*Converter(currency) > balance) {return false;}
+        this.balance = (long) (this.balance - amount*Converter(currency));
         return true;
     }
 
