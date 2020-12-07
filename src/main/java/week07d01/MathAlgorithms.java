@@ -15,7 +15,7 @@ public class MathAlgorithms {
         primNumbers = Arrays.asList(prims);
     }
 
-    public static boolean isPrime(int x) {
+    public static boolean isPrimeFromList(int x) {
         if (x <= 0) {
             throw new IllegalArgumentException("Try with a positive number!");
         }
@@ -25,6 +25,21 @@ public class MathAlgorithms {
                 result = true;
             }
         }
+        return result;
+    }
+
+    public static boolean isPrime(int x) {
+        if (x <= 0) {
+            throw new IllegalArgumentException("Try with a positive number!");
+        }
+        int z = 0;
+        boolean result = false;
+        for (int y=1; y<x; y++) {
+            if (x%y == 0) {
+                z++;
+            }
+        }
+        if (z<2) {result= true;}
         return result;
     }
 }

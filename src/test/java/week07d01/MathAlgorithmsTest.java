@@ -10,11 +10,14 @@ public class MathAlgorithmsTest {
 
     @Test
     public void testZeroInput() {
-        Exception ex = assertThrows(IllegalArgumentException.class, () -> MathAlgorithms.isPrime(0));
+        Exception ex = assertThrows(IllegalArgumentException.class, () -> MathAlgorithms.isPrimeFromList(0));
     }
 
     @Test
     public void testAPrimeAndANotAPrime() {
+        assertTrue(MathAlgorithms.isPrimeFromList(2));
+        assertFalse(MathAlgorithms.isPrimeFromList(4));
+
         assertTrue(MathAlgorithms.isPrime(2));
         assertFalse(MathAlgorithms.isPrime(4));
     }
