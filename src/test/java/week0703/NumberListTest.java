@@ -23,4 +23,11 @@ public class NumberListTest {
         NumberList n = new NumberList();
         assertFalse(n.isIncreasing(testList));
     }
+
+    @Test
+    public void testSame(){
+        List<Integer> testList = Arrays.asList(new Integer[]{1,2,3,3,3});
+        NumberList n = new NumberList();
+        assertTrue(n.isIncreasing(testList));
+    }
 }
