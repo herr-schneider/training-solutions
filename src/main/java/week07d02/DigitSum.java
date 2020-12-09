@@ -3,7 +3,7 @@ package week07d02;
 public class DigitSum {
 
     public static int sumOfDigits(int x){
-        String strX = "" + x;
+        String strX = "" + x; // Integer.ToString
         int result =0;
         String control;
         for ( int num = 0; num < strX.length(); num++) {
