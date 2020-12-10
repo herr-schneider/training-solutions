@@ -42,7 +42,7 @@ public class Lab {
 
     @Override
     public String toString() {
-        return completed ? "Feladat: " + title + "Kész van?" + completed + "Mikor készült el:" + completedAt : "Feladat: " + title + "Kész van?" + completed;
+        return completed ? "Feladat: " + title + "Kész van? " + completed + "Mikor készült el: " + completedAt : "Feladat: " + title + "Kész van? " + completed;
     }
 
 }

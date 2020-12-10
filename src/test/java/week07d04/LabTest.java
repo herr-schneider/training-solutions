@@ -14,6 +14,7 @@ public class LabTest {
         assertEquals("Jeep", l.getTitle());
         assertEquals(null, l.getCompletedAt());
         assertEquals(false, l.isCompleted());
+        System.out.println(l.toString());
     }
 
     @Test
@@ -23,7 +24,7 @@ public class LabTest {
         assertEquals("Jeep", l.getTitle());
         assertEquals(LocalDate.now(), l.getCompletedAt());
         assertEquals(true, l.isCompleted());
-
+        System.out.println(l.toString());
     }
 
 }
