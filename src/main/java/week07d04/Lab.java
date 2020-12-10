@@ -28,6 +28,18 @@ public class Lab {
         this.completedAt = LocalDate.now();
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public LocalDate getCompletedAt() {
+        return completedAt;
+    }
+
     @Override
     public String toString() {
         return completed ? "Feladat: " + title + "Kész van?" + completed + "Mikor készült el:" + completedAt : "Feladat: " + title + "Kész van?" + completed;
