@@ -14,8 +14,7 @@ public class Lab {
 
     public Lab(String title, LocalDate completedAt) {
         this.title = title;
-        this.completed = true;
-        this.completedAt = completedAt;
+        completed(completedAt);
     }
 
     public void completed (LocalDate completedAt) {
@@ -24,8 +23,7 @@ public class Lab {
     }
 
     public void completed () {
-        this.completed = true;
-        this.completedAt = LocalDate.now();
+        completed(LocalDate.now()); // osztálytárstól lopva
     }
 
     public String getTitle() {
