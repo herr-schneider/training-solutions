@@ -11,6 +11,6 @@ public class Motorcycle extends Vehicle{
     }
 
     public Motorcycle(){
-        super();
+        super(TransmissionType.SEQUENTIAL);
     }
 }

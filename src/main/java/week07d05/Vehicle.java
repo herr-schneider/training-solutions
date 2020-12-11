@@ -9,6 +9,9 @@ public class Vehicle {
         this.transmissionType = transmissionType;
     }
 
+    public Vehicle(TransmissionType transmissionType) {
+        this.transmissionType = transmissionType;
+    }
     public Vehicle(){
         this(5, TransmissionType.MANUAL);
     }
