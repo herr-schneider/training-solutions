@@ -6,5 +6,8 @@ public class Truck extends Vehicle{
         super(numberOfGears, transmissionType);
     }
 
+    public Truck(){
+        super();
+    }
 
 }

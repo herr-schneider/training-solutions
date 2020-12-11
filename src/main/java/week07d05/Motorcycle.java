@@ -9,4 +9,8 @@ public class Motorcycle extends Vehicle{
     public Motorcycle(int numberOfGears) {
         this(numberOfGears, TransmissionType.SEQUENTIAL);
     }
+
+    public Motorcycle(){
+        super();
+    }
 }

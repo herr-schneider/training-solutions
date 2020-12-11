@@ -10,4 +10,7 @@ public class Car extends Vehicle{
         this(numberOfGears, TransmissionType.AUTOMATIC);
     }
 
+    public Car(){
+        super();
+    }
 }
