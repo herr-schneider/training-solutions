@@ -18,8 +18,16 @@ public class ShoppingListTest {
         assertEquals(240, s.calculateSum("/training/training_solutions/src/main/java/week07d04/shoppingList.txt"));
     }
 
+    @Test
     public void testZeroInput() {
-        Exception ex = assertThrows(IllegalArgumentException.class, () -> s.calculateSum(null));
+        Exception ex = assertThrows(IllegalArgumentException.class, () -> s.calculateSum("../shoppingList.txt"));
         Assertions.assertEquals("Wrong path!", ex.getMessage());
     }
+
+    @Test
+    public void testNullInput() {
+        Exception ex = assertThrows(IllegalArgumentException.class, () -> s.calculateSum(null));
+        Assertions.assertEquals( "Try with a path!", ex.getMessage());
+    }
+
 }

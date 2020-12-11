@@ -8,6 +8,9 @@ public class ShoppingList {
     static long sumOf;
 
     public long calculateSum(String path) {
+        if (path == null || path.isBlank() || path.isEmpty()) {
+            throw new IllegalArgumentException("Try with a path!");
+        }
         int result = 0;
         try ( Scanner s = new Scanner(Path.of(path));){
             s.useDelimiter(";");
