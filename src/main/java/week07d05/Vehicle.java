@@ -1,8 +1,8 @@
 package week07d05;
 
 public class Vehicle {
-    int numberOfGears;
-    TransmissionType transmissionType;
+    private int numberOfGears;
+    private TransmissionType transmissionType;
 
     public Vehicle(int numberOfGears, TransmissionType transmissionType) {
         this.numberOfGears = numberOfGears;
