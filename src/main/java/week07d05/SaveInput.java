@@ -2,6 +2,10 @@ package week07d05;
 import java.io.File;
 import java.io.FileWriter;   // Import the FileWriter class
 import java.io.IOException;  // Import the IOException class to handle errors
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class SaveInput {
 
@@ -34,7 +38,25 @@ public class SaveInput {
             System.out.println("Már van ilyen fájl, de nem nem baj!");}
         else {
             System.out.println("Van baj, nem kevés!");}
-        System.out.println(fileWriter(data1.concat(" " + data2),filename));
+        System.out.println(fileWriter(data1,filename));
+        System.out.println(fileWriter(data2,filename));
+
+    }
+
+    public List<String> fileReader(String filename, String delimiter){
+        List<String> result = new ArrayList<>();
+        int num = 0;
+        try(Scanner scanner = new Scanner(Path.of(filename))){
+            scanner.useDelimiter(delimiter);
+          while (scanner.hasNext()){
+              result.add(scanner.next());
+              System.out.println(result.get(num));
+              num ++;
+          }
+        }catch (IOException ie){
+            System.out.println(ie);
+        }
+        return result;
     }
 
 }
