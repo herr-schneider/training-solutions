@@ -1,8 +1,8 @@
 package abstractclass.gamecharacter;
 
 public class Point {
-    private long x;
-    private long y;
+    private final long x;
+    private final long y;
 
     public Point(long x, long y) {
         this.x = x;
