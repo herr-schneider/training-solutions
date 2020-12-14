@@ -23,7 +23,7 @@ public class Sultan {
 
     public void printTheResult() {
         for (int i = 1; i < doorStatus.length; i++) {
-            System.out.print("Az" + i + ". zárka nyitva:");
+            System.out.print("Az" + i + ". zárka állapota:");
             if (doorStatus[i] % 2 == 0) {
                 System.out.println("zárva");
             } else {
