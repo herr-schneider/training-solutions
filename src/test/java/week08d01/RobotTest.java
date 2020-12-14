@@ -19,12 +19,11 @@ public class RobotTest {
 
     @Test
     public void testMoving() {
-        Robot r = new Robot("JBFLLFBJL");
-        Robot other = new Robot("JBFLJBFLL");
+        Robot r = new Robot("JBFL");
+        Robot other = new Robot("JBFL");
         r.mover();
         other.moverIf();
         assertEquals(true, r.getPos().equals(other.getPos()));
-        assertEquals(r.getPos(), other.getPos());
     }
 }
 

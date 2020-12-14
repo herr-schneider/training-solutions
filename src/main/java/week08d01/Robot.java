@@ -1,5 +1,7 @@
 package week08d01;
 
+import java.util.Objects;
+
 public class Robot {
     private String controlStr;
     private Position pos = new Position(0, 0);
