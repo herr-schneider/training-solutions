@@ -4,12 +4,21 @@ public class Robot {
     private String controlStr;
     private Position pos = new Position(0, 0);
 
+    public Robot(String controlStr, Position pos) {
+        this.pos = pos;
+        this.controlStr = controlStr;
+    }
+
     public Robot(String controlStr) {
         this.controlStr = controlStr;
     }
 
-    public String getPos() {
+    public String getPosString() {
         return pos.toString();
+    }
+
+    public Position getPos() {
+        return pos;
     }
 
     public Position controlIf(char c) {
