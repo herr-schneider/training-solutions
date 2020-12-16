@@ -9,8 +9,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StringListTest {
-    List str1 = Arrays.asList("egy", "ketto", "harom", "negy");
-    List str2 = Arrays.asList("negy", "ot", "hat", "het");
+    List str1 = Arrays.asList("egy", "ketto", "harom", "negy", "ot");
+    List str2 = Arrays.asList("negy", "ot", "ot" ,"hat", "het");
     StringList s = new StringList();
 
     @Test
