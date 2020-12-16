@@ -12,7 +12,7 @@ public class ShoppingList {
             throw new IllegalArgumentException("Try with a path!");
         }
         int result = 0;
-        try ( Scanner s = new Scanner(Path.of(path));){
+        try (Scanner s = new Scanner(Path.of(path));){
             s.useDelimiter(";");
             while (s.hasNext()) {
                 String str = s.next();

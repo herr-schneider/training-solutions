@@ -2,14 +2,17 @@ package week07d05;
 import java.io.File;
 import java.io.FileWriter;   // Import the FileWriter class
 import java.io.IOException;  // Import the IOException class to handle errors
+import java.nio.file.Files;
+import java.nio.file.OpenOption;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class SaveInput {
 
-    public SaveErrors fileWriter(String writableStr, String path) {
+    public SaveErrors fileWriterOld(String writableStr, String path) {
         try {
             FileWriter myWriter = new FileWriter(path);
             myWriter.write(writableStr);
@@ -19,6 +22,17 @@ public class SaveInput {
             return SaveErrors.WRITEFAILED;
         }
     }
+
+    public SaveErrors fileWriter(String writableStr, String path) {
+        Path eleresi = Path.of(path);
+        try {
+            Files.writeString(eleresi, writableStr, StandardOpenOption.APPEND);
+            return SaveErrors.WRITESUCCESS;
+        } catch (IOException e) {
+            return SaveErrors.WRITEFAILED;
+        }
+    }
+
 
     public SaveErrors fileCreator(String path) {
         try {
