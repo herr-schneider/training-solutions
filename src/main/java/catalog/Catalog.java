@@ -12,7 +12,21 @@ public class Catalog {
     }
 
     public double averagePageNumberOver(int i) {
-        return 0.0;
+        if (i < 1){throw new IllegalArgumentException("Page number must be positive");}
+        int results = 0;
+        int div =0;
+        for (CatalogItem item : catalogItems) {
+            for (Feature feature : item.getFeatures()) {
+                if (feature.getClass() == PrintedFeatures.class) {
+                    if (((PrintedFeatures) feature).getNumberOfPages() > i){
+                        results += ((PrintedFeatures) feature).getNumberOfPages();
+                        div ++;
+                    }
+                }
+            }
+        }
+        if (div==0){throw new IllegalArgumentException("No page");}
+        return results/div;
     }
 
     public void deleteItemByRegistrationNumber(String str) {
@@ -30,7 +44,7 @@ public class Catalog {
     }
     public List<CatalogItem> findByCriteria(SearchCriteria searchCriteria) {
         List<CatalogItem> results = new ArrayList<>();
-        for (CatalogItem item : catalogItems) {
+        /*for (CatalogItem item : catalogItems) {
             for (String itemTitle : item.getTitles()){
                 if (itemTitle == searchCriteria.getTitle()){
                     results.add(item);
@@ -41,12 +55,25 @@ public class Catalog {
                     results.add(item);
                 }
             }
+        } */
+        for (CatalogItem item : catalogItems) {
+        if (item.getTitles().contains(searchCriteria.getTitle()) || item.getContributors().contains(searchCriteria.getContributor())){
+            results.add(item);
+        }
         }
         return results;
     }
 
     public int getAllPageNumber() {
-        return PrintedFeatures.allPageNumber;
+        int results = 0;
+        for (CatalogItem item : catalogItems) {
+            for (Feature feature : item.getFeatures()) {
+                if (feature.getClass() == PrintedFeatures.class) {
+                    results += ((PrintedFeatures) feature).getNumberOfPages();
+                }
+            }
+        }return results;
+        //return PrintedFeatures.allPageNumber;
     }
 
     public List<CatalogItem> getAudioLibraryItems() {
@@ -74,7 +101,15 @@ public class Catalog {
     }
 
     public int getFullLength() {
-        return AudioFeatures.fullLenght;
+        int results = 0;
+        for (CatalogItem item : catalogItems) {
+            for (Feature feature : item.getFeatures()) {
+                if (feature.getClass() == AudioFeatures.class) {
+                    results += ((AudioFeatures) feature).getLength();
+                }
+            }
+        }return results;
+        //return AudioFeatures.fullLenght;
     }
 
 }

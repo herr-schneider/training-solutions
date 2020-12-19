@@ -5,10 +5,10 @@ import java.util.List;
 
 public class AudioFeatures implements Feature{
     private List<String> composer =  new ArrayList<>();
-    private final int length;
+    private int length;
     private List<String> performers = new ArrayList<>();
     private final String title;
-    static int fullLenght;
+    static int fullLenght=0;
     private List<String> contributors = new ArrayList<>();
 
     public AudioFeatures(String title, int length, List<String> performers) {
@@ -27,7 +27,7 @@ public class AudioFeatures implements Feature{
         else{this.title = title;}
         if (length < 1){throw new IllegalArgumentException("");}
         else{this.length = length;
-        this.fullLenght = this.fullLenght + length;}
+        this.fullLenght = this.fullLenght + this.length;}
     }
 
     public List<String> getContributors(){

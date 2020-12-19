@@ -3,10 +3,10 @@ package catalog;
 import java.util.List;
 
 public class PrintedFeatures implements Feature{
-    List<String> authors;
-    int numberOfPages;
-    String title;
-    static int allPageNumber;
+    private List<String> authors;
+    private int numberOfPages;
+    private String title;
+    static int allPageNumber=0;
 
     public PrintedFeatures(String title, int numberOfPages, List<String> authors) {
         if (Validators.isEmpty(authors)){throw new IllegalArgumentException("Empty authors");}
@@ -16,7 +16,7 @@ public class PrintedFeatures implements Feature{
         if (numberOfPages < 1){throw new IllegalArgumentException("Invalid Number Of Pages");}
         else {
         this.numberOfPages = numberOfPages;
-        this.allPageNumber = this.allPageNumber + numberOfPages;}
+        allPageNumber += numberOfPages;}
 
     }
 
