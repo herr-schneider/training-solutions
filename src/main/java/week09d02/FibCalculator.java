@@ -18,10 +18,7 @@ public class FibCalculator {
         return result;
     }
 
-    public static void main(String[] args) {
-        FibCalculator f = new FibCalculator();
-        System.out.println(f.sumEvents(20));
-    }
+
 }
 
 

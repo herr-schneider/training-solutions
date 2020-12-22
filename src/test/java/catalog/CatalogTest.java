@@ -50,7 +50,7 @@ public class CatalogTest {
         catalog.addItem(catalogItem1);
         catalog.addItem(catalogItem2);
 
-        assertEquals(2, catalog.getAudioLibraryItems().size());
+        assertEquals(1, catalog.getAudioLibraryItems().size());
 
     }
 
