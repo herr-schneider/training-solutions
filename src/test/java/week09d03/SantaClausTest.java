@@ -6,7 +6,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
 public class SantaClausTest {
+
 
     @Test
     public void testRandom() {
@@ -33,8 +37,9 @@ public class SantaClausTest {
 
         SantaClaus santa = new SantaClaus(persons);
         santa.getThroughChimneys();
-        for (Person person : persons) {
-            System.out.println(person.getPresent());
-        }
+        assertEquals(Present.ELECTRONIC, persons.get(0).getPresent());
+        assertEquals("HOUSEKEEPING", persons.get(1).getPresent().toString());
+        assertEquals("HOUSEKEEPING", persons.get(2).getPresent().toString());
+        assertEquals(Present.HOUSEKEEPING, persons.get(3).getPresent());
     }
 }

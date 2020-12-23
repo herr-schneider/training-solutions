@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SantaClaus {
-    List<Person> people;
+    private List<Person> people;
 
     public SantaClaus(List<Person> people) {
         this.people = people;
@@ -14,5 +14,9 @@ public class SantaClaus {
         for (Person person : people){
             person.setPresent();
         }
+    }
+
+    public List<Person> getPeople() {
+        return new ArrayList<>(this.people);
     }
 }

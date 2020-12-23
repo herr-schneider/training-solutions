@@ -1,12 +1,13 @@
 package week09d03;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class Person {
-    String name;
-    int age;
-    Present present;
-    Random testRandom;
+    private String name;
+    private int age;
+    private Present present;
+    private Random testRandom;
 
     public Person(String name, int age) {
         this.name = name;
@@ -38,8 +39,32 @@ public class Person {
             default:{throw new ArrayStoreException("");}
         }
     }
+    public void setPresentArray() {
+        int ran;
+        if (age <= 12){ran = testRandom.nextInt(2)+1;}
+        else {ran = testRandom.nextInt(3);}
+        present = Present.values()[ran];
+    }
 
     public Present getPresent() {
         return present;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return present == person.present;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(present);
+    }
+
+    @Override
+    public String toString() {
+        return "" + present;
     }
 }
