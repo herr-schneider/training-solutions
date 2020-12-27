@@ -9,6 +9,6 @@ public class UnderlinedAndItalicAndBoldHtmlText extends HtmlText {
     }
 
     public String getPlainText() {
-        return "<b><i><u>" + super.getPlainText() + "</u></i></b>";
+        return "<u><i><b>" + super.getPlainText() + "</b></i></u>";
     }
 }

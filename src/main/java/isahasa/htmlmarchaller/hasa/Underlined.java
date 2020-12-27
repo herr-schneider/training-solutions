@@ -2,9 +2,9 @@ package isahasa.htmlmarchaller.hasa;
 
 import isahasa.htmlmarchaller.TextSource;
 
-public class UnderLine extends TextDecorator {
+public class Underlined extends TextDecorator {
 
-    public UnderLine(TextSource textSource) {
+    public Underlined(TextSource textSource) {
         super(textSource);
     }
 

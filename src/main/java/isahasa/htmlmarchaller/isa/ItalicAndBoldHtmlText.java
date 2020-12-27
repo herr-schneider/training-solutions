@@ -9,6 +9,6 @@ public class ItalicAndBoldHtmlText extends HtmlText {
     }
 
     public String getPlainText(){
-        return "<i><u>" + super.getPlainText() + "</u></i>";
+        return "<i><b>" + super.getPlainText() + "</b></i>";
     }
 }
