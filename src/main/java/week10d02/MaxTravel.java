@@ -1,6 +1,8 @@
 package week10d02;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MaxTravel {
@@ -9,6 +11,10 @@ public class MaxTravel {
 
     private int[] busStops = new int[MAX];
 
+    public int getMaxIndex(Integer... passengerList){
+        List<Integer> passList = Arrays.asList(passengerList);
+         return getMaxIndex(passList);
+    }
 
     public int getMaxIndex(List<Integer> passengerList) {
         int result = 0;
