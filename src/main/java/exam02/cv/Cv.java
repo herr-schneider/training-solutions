@@ -22,8 +22,8 @@ public class Cv {
 
     }
 
-    public int findSkillLevelByName(String nameOfSkill) {
-        if (skills.size() < 1) {throw new IllegalArgumentException("SkillNotFoundException");}
+    public int findSkillLevelByName(String nameOfSkill) throws SkillNotFoundException {
+        if (skills.size() < 1) {throw new SkillNotFoundException("");}
         for (Skill skill : skills) {
             if (skill.getName().equals(nameOfSkill)) {
                 return skill.getLevel();
