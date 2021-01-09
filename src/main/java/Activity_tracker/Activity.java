@@ -1,7 +1,7 @@
 package Activity_tracker;
 
 public interface Activity {
-    int getDistance();
+    double getDistance();
 
     ActivityType getType();
 }
