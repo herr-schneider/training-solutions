@@ -6,6 +6,7 @@ public class Coordinate {
 
 
     public Coordinate(double latitude, double longitude) {
+        if (latitude<-91 || latitude > 90 || longitude<-180 || longitude>180){throw new IllegalArgumentException();}
         this.latitude = latitude;
         this.longitude = longitude;
     }
