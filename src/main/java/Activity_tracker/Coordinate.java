@@ -1,19 +1,21 @@
 package Activity_tracker;
 
 public class Coordinate {
-    private final int latitude;
-    private final int longitude;
+    private final double latitude;
+    private final double longitude;
 
-    public Coordinate(int latitude, int longitude) {
+
+    public Coordinate(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    public int getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public int getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
+
 }
