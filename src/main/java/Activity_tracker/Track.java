@@ -14,36 +14,52 @@ public class Track {
         this.trackPoints = trackPoints;
     }
 
-    public Coordinate findMinimumCoordinate(){
+    public Coordinate findMinimumCoordinate() {
         double latitude = 90;
         double longitude = 180;
-    for (TrackPoint trackPoint : trackPoints) {
-        if (trackPoint.getCoordinate().getLatitude() < latitude){
-            latitude = trackPoint.getCoordinate().getLatitude();
+        for (TrackPoint trackPoint : trackPoints) {
+            if (trackPoint.getCoordinate().getLatitude() < latitude) {
+                latitude = trackPoint.getCoordinate().getLatitude();
+            }
+            if (trackPoint.getCoordinate().getLongitude() < longitude) {
+                longitude = trackPoint.getCoordinate().getLongitude();
+            }
         }
-        if (trackPoint.getCoordinate().getLongitude() < longitude){
-            longitude = trackPoint.getCoordinate().getLongitude();
-        }
-    }
-    return new Coordinate(latitude, longitude);
-    }
-    public double getRectangleArea(){
-        double result = 0.0;
-        result = trackPoints.get(0).getDistanceFrom(trackPoints.get(1))+
-                trackPoints.get(1).getDistanceFrom(trackPoints.get(2))+
-                trackPoints.get(2).getDistanceFrom(trackPoints.get(3))+
-                trackPoints.get(3).getDistanceFrom(trackPoints.get(0));
-    return result;
+        return new Coordinate(latitude, longitude);
     }
 
-    public Coordinate findMaximumCoordinate(){
+    public double getRectangleArea() {
+        double lat1 = trackPoints.get(0).getCoordinate().getLatitude() + 90;
+        double lat2 = trackPoints.get(1).getCoordinate().getLatitude() + 90;
+        double lat3 = trackPoints.get(2).getCoordinate().getLatitude() + 90;
+        double lat4 = trackPoints.get(3).getCoordinate().getLatitude() + 90;
+        double lon1 = trackPoints.get(0).getCoordinate().getLongitude() + 180;
+        double lon2 = trackPoints.get(1).getCoordinate().getLongitude() + 180;
+        double lon3 = trackPoints.get(2).getCoordinate().getLongitude() + 180;
+        double lon4 = trackPoints.get(3).getCoordinate().getLongitude() + 180;
+        double a = Math.sqrt(Math.pow(Math.abs(lat1 - lat2), 2) + Math.pow(Math.abs(lon1 - lon2), 2));
+        double b = Math.sqrt(Math.pow(Math.abs(lat3 - lat4), 2) + Math.pow(Math.abs(lon3 - lon4), 2));
+        double c = Math.sqrt(Math.pow(Math.abs(lat2 - lat3), 2) + Math.pow(Math.abs(lon2 - lon3), 2));
+        double d = Math.sqrt(Math.pow(Math.abs(lat4 - lat1), 2) + Math.pow(Math.abs(lon4 - lon1), 2));
+        double e = Math.sqrt(Math.pow(Math.abs(lat1 - lat3), 2) + Math.pow(Math.abs(lon1 - lon3), 2));
+        double f = Math.sqrt(Math.pow(Math.abs(lat2 - lat4), 2) + Math.pow(Math.abs(lon2 - lon4), 2));
+        return e * f * Math.sin(90) / 2;
+        //return (a + b) * (c + d) / 4;
+
+        /* return trackPoints.get(0).getDistanceFrom(trackPoints.get(1))+
+                trackPoints.get(1).getDistanceFrom(trackPoints.get(2))+
+                trackPoints.get(2).getDistanceFrom(trackPoints.get(3))+
+                trackPoints.get(3).getDistanceFrom(trackPoints.get(0)); */
+    }
+
+    public Coordinate findMaximumCoordinate() {
         double latitude = -90;
         double longitude = -180;
         for (TrackPoint trackPoint : trackPoints) {
-            if (trackPoint.getCoordinate().getLatitude() > latitude){
+            if (trackPoint.getCoordinate().getLatitude() > latitude) {
                 latitude = trackPoint.getCoordinate().getLatitude();
             }
-            if (trackPoint.getCoordinate().getLongitude() > longitude){
+            if (trackPoint.getCoordinate().getLongitude() > longitude) {
                 longitude = trackPoint.getCoordinate().getLongitude();
             }
         }
