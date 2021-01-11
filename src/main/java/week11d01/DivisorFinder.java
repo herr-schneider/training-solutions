@@ -31,13 +31,13 @@ public class DivisorFinder {
     }
 
     public int findDivisorsMyOwn(int n) {
-        if (n > 1000) {
+        if (n >= 1000) {
             return findDivisors1000(n);
         }
-        if (n > 100) {
+        if (n >= 100) {
             return findDivisors100(n);
         }
-        if (n > 10) {
+        if (n >= 10) {
             return findDivisors10(n);
         }
         return 0;
@@ -46,20 +46,32 @@ public class DivisorFinder {
     public int findDivisors1000(int n) {
         int result = 0;
         int thousand = n / 1000;
+        System.out.println(thousand);
         int hundred = (n - thousand * 1000) / 100;
-        int deca = (n - hundred * 100) / 10;
-        int single = n - (hundred * 100 + deca * 10);
-        if (n % thousand == 0) {
-            result++;
+        System.out.println(hundred);
+        int deca = (n - thousand * 1000 - hundred * 100) / 10;
+        System.out.println(deca);
+        int single = n - (thousand * 1000 + hundred * 100 + deca * 10);
+        System.out.println(single);
+        if (thousand != 0) {
+            if (n % thousand == 0) {
+                result++;
+            }
         }
-        if (n % hundred == 0) {
-            result++;
+        if (hundred != 0) {
+            if (n % hundred == 0) {
+                result++;
+            }
         }
-        if (n % deca == 0) {
-            result++;
+        if (deca != 0) {
+            if (n % deca == 0) {
+                result++;
+            }
         }
-        if (n % single == 0) {
-            result++;
+        if (deca != 0) {
+            if (n % single == 0) {
+                result++;
+            }
         }
         return result;
     }
