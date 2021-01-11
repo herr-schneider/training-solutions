@@ -3,7 +3,7 @@ package week11d01;
 public class DivisorFinder {
 
     public int findDivisors(int n){
-        if (n>1000) {return findDivisors100(n);}
+        if (n>1000) {return findDivisors1000(n);}
         if (n>100) {return findDivisors100(n);}
         if (n>10) {return findDivisors10(n); }
         return 0;
