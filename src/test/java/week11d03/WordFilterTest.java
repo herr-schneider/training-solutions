@@ -14,4 +14,14 @@ class WordFilterTest {
         List<String> words = Arrays.asList("cica", "macska", "kutya","tigris","C");
         assertEquals(3, new WordFilter().wordsWithChar(words, 'c').size());
     }
+    @Test
+    public void wordsWithChar2() {
+        List<String> words = Arrays.asList("cica", "macska", "kutya","tigris","C");
+        assertEquals(3, new WordFilter().wordsWithChar2(words, 'c').size());
+    }
+    @Test
+    public void wordsWithChar3() {
+        List<String> words = Arrays.asList("cica", "macska", "kutya","tigris","C");
+        assertEquals(3, new WordFilter().wordsWithChar3(words, 'c').size());
+    }
 }
