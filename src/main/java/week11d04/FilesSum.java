@@ -2,7 +2,6 @@ package week11d04;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -20,7 +19,8 @@ public class FilesSum {
             throw new IllegalStateException("Can not read file", ioe);
         }
     } */
-    public int sumNumbers() {
+
+    public int sumNumbers() { // szet kell szervezni
         int result = 0;
         String eleresi;
         String temp;
@@ -33,7 +33,9 @@ public class FilesSum {
                     result += Integer.parseInt(temp);
                 } catch (IOException ioe) {
                  throw new IllegalArgumentException("Fájl hiba", ioe);
-                };
+                } catch (NumberFormatException nfe){
+                    throw new IllegalArgumentException("Nem szám hiba", nfe);
+                }
             }
         }
       return result;
