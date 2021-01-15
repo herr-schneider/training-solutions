@@ -29,7 +29,9 @@ public class Track {
     }
 
     public double getRectangleArea() {
-        double lat1 = trackPoints.get(0).getCoordinate().getLatitude() + 90;
+        return (findMaximumCoordinate().getLatitude()-findMinimumCoordinate().getLatitude()) *
+                (findMaximumCoordinate().getLongitude()-findMinimumCoordinate().getLongitude());
+       /*  double lat1 = trackPoints.get(0).getCoordinate().getLatitude() + 90;
         double lat2 = trackPoints.get(1).getCoordinate().getLatitude() + 90;
         double lat3 = trackPoints.get(2).getCoordinate().getLatitude() + 90;
         double lat4 = trackPoints.get(3).getCoordinate().getLatitude() + 90;
