@@ -27,8 +27,20 @@ public class GradeRounder {
     }
 
     public int calculator(int num) {
-        int residue = 0;
-        return num % 5 <= 2 ? ((int) (num / 5)) * 5 : ((int) (num / 5) + 1) * 5;
+       return num % 5 <= 2 ? ((int) (num / 5)) * 5 : ((int) (num / 5) + 1) * 5;
+    }
+
+    public int[] OrgRoundGrades(int[] grades) {
+        for (int i = 0; i < grades.length; i++) {
+            if (grades[i] < 40 && grades[i] > 0) {
+                int floor = grades[i] / 5;
+                int next = (floor + 1) * 5;
+                if (next - grades[i] < 3) {
+                    grades[i] = next;
+                }
+            }
+        }
+        return grades;
     }
 
     public String toString(int[] grades) {
