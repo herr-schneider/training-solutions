@@ -1,8 +1,6 @@
 package week12d04;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -66,5 +64,89 @@ public class Decrypter {
             result.append(c);
         }
         return result.toString();
+    }
+
+    public void bestSolution() {
+        Path path = Path.of("secret.dat");
+        try {
+            byte[] bytes = Files.readAllBytes(path);
+            for (byte b : bytes) {
+                char c = (char) (b + 10);
+                System.out.print(c);
+            }
+        } catch (IOException ioe) {
+            throw new IllegalStateException("Can not read file", ioe);
+        }
+    }
+
+    public String bestSolutionStringBuilder() {
+        StringBuilder sb = new StringBuilder();
+        Path path = Path.of("secret.dat");
+        try {
+            byte[] bytes = Files.readAllBytes(path);
+            for (byte b : bytes) {
+                char c = (char) (b + 10);
+                sb.append(c);
+            }
+        } catch (IOException ioe) {
+            throw new IllegalStateException("Can not read file", ioe);
+        }
+        return sb.toString();
+    }
+
+    public String bestSolutionStringPieced() {
+        StringBuilder sb = new StringBuilder();
+        Path path = Path.of("secret.dat");
+        try (InputStream is = Files.newInputStream(path)) {
+            byte[] buffer = new byte[100]; // eles 64k buffer
+            int size;
+            while ((size = is.read()) > 0) {
+                System.out.println(size);
+                for (int i = 0; i < size; i++) {
+                    char c = (char) (buffer[i] + 10);
+                    sb.append(c);
+                }
+            }
+        } catch (IOException ioe) {
+            throw new IllegalStateException("Can not read file", ioe);
+        }
+        return sb.toString();
+    }
+
+    public void ReadWriterByte(Path source, Path destination) {
+
+        StringBuilder sb = new StringBuilder();
+        Path path = Path.of("secret.dat");
+        try (InputStream is = Files.newInputStream(source);
+             OutputStream os = Files.newOutputStream(destination)) {
+            byte[] buffer = new byte[100]; // eles 64k buffer
+            int size;
+            while ((size = is.read()) > 0) {
+                System.out.println(size);
+                for (int i = 0; i < size; i++) {
+                    char c = (char) (buffer[i] + 10);
+                    os.write(c);
+                }
+            }
+        } catch (IOException ioe) {
+            throw new IllegalStateException("Can not read file", ioe);
+        }
+    }
+
+    public void ReadWriterString(Path source, Path destination) {
+        try (InputStream is = Files.newInputStream(source);
+             Writer os = Files.newBufferedWriter(destination)) {
+            byte[] buffer = new byte[100]; // eles 64k buffer
+            int size;
+            while ((size = is.read()) > 0) {
+                System.out.println(size);
+                for (int i = 0; i < size; i++) { // fontos, hogy csak a size-ig meg a ciklus
+                    char c = (char) (buffer[i] + 10);
+                    os.write(Character.toString(c));
+                }
+            }
+        } catch (IOException ioe) {
+            throw new IllegalStateException("Can not read file", ioe);
+        }
     }
 }
