@@ -40,7 +40,7 @@ public class Decrypter {
     public byte[] readFromScream() {
         byte[] data;
         try {
-            InputStream inputStream = Decrypter.class.getResourceAsStream("/secret.dat");
+            InputStream inputStream = Decrypter.class.getResourceAsStream("/secret.dat"); // resource csak olvasas, nincs irás az alkalmazas resources konyvtarabe
             data = inputStream.readAllBytes();
         } catch (IOException ioe) {
             throw new IllegalStateException("Can not read file", ioe);
