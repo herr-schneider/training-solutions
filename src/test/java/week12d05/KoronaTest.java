@@ -13,6 +13,6 @@ class KoronaTest {
 
     @Test
     void lineReaderTest() {
-        assertEquals(11, new Korona().lineReader());
+        assertEquals(11, new Korona().lineReader("src/main/java/week12d05/index.html", "koronavírus"));
     }
     }
