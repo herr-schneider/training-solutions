@@ -17,14 +17,13 @@ public class PostCode {
         String longestCityName = "Unknown error!";
         try (BufferedReader bf = new BufferedReader(Files.newBufferedReader(file))) {
             String line;
-            // bf.readLine(); // fejlec szkippelés :)
             headerSkipper(bf); //olvashatosag kedveert
             String[] lineSplit;
             while ((line = bf.readLine()) != null) {
-                lineSplit = line.split(";");
-                if (maxLenght < lineSplit[1].length()) { // hogy lehet kiszervezni
-                    longestCityName = lineSplit[1];
-                    maxLenght = lineSplit[1].length();
+                String city = splitLine(line);
+                if (maxLenght < city.length()) {
+                    longestCityName = city;
+                    maxLenght = city.length();
                 }
             }
         } catch (IOException ioe) {
@@ -38,5 +37,8 @@ public class PostCode {
         br.readLine();
     }
 
-
+private String splitLine(String line){
+        String[] temp = line.split(";");
+        return temp[1].trim();
+}
 }
