@@ -14,13 +14,15 @@ public class PostCode {
     public String readFromFile() {
         Path file = Path.of("src/main/java/week13d01/iranyitoszamok-varosok-2021.csv");
         int maxLenght = 0;
+        int lineNumber = 0;
         String longestCityName = "Unknown error!";
         try (BufferedReader bf = new BufferedReader(Files.newBufferedReader(file))) {
             String line;
             headerSkipper(bf); //olvashatosag kedveert
             String[] lineSplit;
             while ((line = bf.readLine()) != null) {
-                String city = splitLine(line);
+                lineNumber++;
+                String city = splitLine(line, lineNumber);
                 if (maxLenght < city.length()) {
                     longestCityName = city;
                     maxLenght = city.length();
@@ -33,12 +35,15 @@ public class PostCode {
         return longestCityName;
     }
 
-    private void headerSkipper(BufferedReader br) throws IOException{
+    private void headerSkipper(BufferedReader br) throws IOException {
         br.readLine();
     }
 
-private String splitLine(String line){
+    private String splitLine(String line, int lineNumber) throws IOException {
         String[] temp = line.split(";");
+        if (temp.length < 1) {
+            throw new IOException("Wrong line" + lineNumber);
+        }
         return temp[1].trim();
-}
+    }
 }
