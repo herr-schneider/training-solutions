@@ -17,6 +17,8 @@ public class PostCode {
         String longestCityName = "Unknown error!";
         try (BufferedReader bf = new BufferedReader(Files.newBufferedReader(file))) {
             String line;
+            // bf.readLine(); // fejlec szkippelés :)
+            headerSkipper(bf); //olvashatosag kedveert
             String[] lineSplit;
             while ((line = bf.readLine()) != null) {
                 lineSplit = line.split(";");
@@ -26,8 +28,13 @@ public class PostCode {
                 }
             }
         } catch (IOException ioe) {
+            ioe.printStackTrace();
             throw new IllegalStateException("File not found");
         }
         return longestCityName;
+    }
+
+    private void headerSkipper(BufferedReader br) throws IOException{
+        br.readLine();
     }
 }
