@@ -20,13 +20,13 @@ class AirportTest {
         assertEquals("Departure",ar.typeFinder());
     }
 
-
     @Test
     void flyFinder() {
         ar.readFromFile("src/main/java/week13d02/cities.txt");
-        List<Fly> flyList = ar.flyFinderByCityAndType("Dublin", "Arrival");
-        assertEquals(3, ar.flyFinderByCityAndType("Dublin", "Arrival").size());
-        assertEquals(3, flyList.size());
+        assertEquals("Departure", ar.flyFinder("JP2694").getType());
+        assertEquals("Oslo", ar.flyFinder("JP2694").getTarget());
+        assertEquals(7, ar.flyFinder("JP2694").getHour());
+        assertEquals(57, ar.flyFinder("JP2694").getMinute());
     }
 
     @Test
