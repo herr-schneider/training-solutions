@@ -69,11 +69,11 @@ public class Airport {
     }
 
     public Fly earlierFly() {
-        int minHour = Integer.MAX_VALUE;
+        int minHour = 24*60;
         Fly result = flies.get(0);
         int temp = 0;
         for (Fly fly : flies) {
-            temp = fly.getHour() * 60 + fly.getMinute();
+            temp = fly.getHour() * 60 + fly.getMinute(); //departure
             if (minHour > temp) {
                 minHour = temp;
                 result = fly;

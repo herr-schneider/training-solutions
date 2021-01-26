@@ -39,8 +39,9 @@ class AirportTest {
 
     @Test
     void earlierFly() {
-        assertEquals("Paris", (ar.earlierFly().getTarget()));
-        assertEquals(6, (ar.earlierFly().getHour()));
-        assertEquals(1, (ar.earlierFly().getMinute()));
+        ar.readFromFile("src/main/java/week13d02/cities.txt");
+        assertEquals("Paris", ar.earlierFly().getTarget());
+        assertEquals(6, ar.earlierFly().getHour());
+        assertEquals(1, ar.earlierFly().getMinute());
     }
 }
