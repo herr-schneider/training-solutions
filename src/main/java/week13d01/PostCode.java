@@ -19,7 +19,6 @@ public class PostCode {
         try (BufferedReader bf = new BufferedReader(Files.newBufferedReader(file))) {
             String line;
             headerSkipper(bf); //olvashatosag kedveert
-            String[] lineSplit;
             while ((line = bf.readLine()) != null) {
                 lineNumber++;
                 String city = splitLine(line, lineNumber);
