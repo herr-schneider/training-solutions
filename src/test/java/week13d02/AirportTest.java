@@ -2,6 +2,7 @@ package week13d02;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,6 +13,26 @@ class AirportTest {
     void readFromFile() {
         ar.readFromFile("src/main/java/week13d02/cities.txt");
         assertEquals(100, ar.getFlies().size());
+    }
+
+    @Test
+    void readFromFile2() {
+    ar.readFromFile2("src/main/java/week13d02/cities.txt");
+        assertEquals(100, ar.getFlies().size());
+       assertEquals("FG3210", ar.earliestDeparture().getName());
+       assertEquals("Departure", ar.earliestDeparture().getType());
+       assertEquals("Zurich", ar.earliestDeparture().getTarget());
+       assertEquals(LocalTime.of(6,16), ar.earliestDeparture().getTime());
+    }
+
+    @Test
+    void localTimeTest() {
+        ar.readFromFile2("src/main/java/week13d02/cities.txt");
+        int serial = 1;
+        for (Fly fly : ar.getFlies()){
+            System.out.println(serial + ": " + fly.getTime());
+            serial++;
+        }
     }
 
     @Test
@@ -40,8 +61,8 @@ class AirportTest {
     @Test
     void earlierFly() {
         ar.readFromFile("src/main/java/week13d02/cities.txt");
-        assertEquals("Paris", ar.earlierFly().getTarget());
+        assertEquals("Zurich", ar.earlierFly().getTarget());
         assertEquals(6, ar.earlierFly().getHour());
-        assertEquals(1, ar.earlierFly().getMinute());
+        assertEquals(16, ar.earlierFly().getMinute());
     }
 }

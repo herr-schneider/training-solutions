@@ -8,6 +8,7 @@ public class Fly {
     private String target;
     private int hour;
     private int minute;
+    LocalTime time;
 
 
     public Fly(String name, String type, String target, int hour, int minute) {
@@ -16,6 +17,13 @@ public class Fly {
         this.target = target;
         this.hour = hour;
         this.minute = minute;
+    }
+
+    public Fly(String name, String type, String target, LocalTime time) {
+        this.name = name;
+        this.type = type;
+        this.target = target;
+        this.time = time;
     }
 
     public String getName() {
@@ -37,6 +45,8 @@ public class Fly {
     public int getMinute() {
         return minute;
     }
+
+    public LocalTime getTime() {return time; }
 
     @Override
     public String toString() {

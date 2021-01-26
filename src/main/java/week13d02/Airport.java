@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,23 @@ public class Airport {
                 hour = Integer.parseInt(lineSplit[3].substring(0, lineSplit[3].indexOf(":")));
                 minutes = Integer.parseInt(lineSplit[3].substring(lineSplit[3].indexOf(":") + 1));
                 flies.add(new Fly(lineSplit[0], lineSplit[1], lineSplit[2], hour, minutes));
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            throw new IllegalStateException("File not found");
+        }
+    }
+
+    public void readFromFile2(String fileName) {
+        Path file = Path.of(fileName);
+        try (BufferedReader bf = new BufferedReader(Files.newBufferedReader(file))) {
+            String line;
+            String[] lineSplit;
+            while ((line = bf.readLine()) != null) {
+                lineSplit = line.split(" ");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:m");
+                LocalTime time = LocalTime.parse(lineSplit[3], formatter);
+                flies.add(new Fly(lineSplit[0], lineSplit[1], lineSplit[2], time));
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -69,13 +88,25 @@ public class Airport {
     }
 
     public Fly earlierFly() {
-        int minHour = 24*60;
+        int minHour = 24 * 60;
         Fly result = flies.get(0);
         int temp = 0;
         for (Fly fly : flies) {
             temp = fly.getHour() * 60 + fly.getMinute(); //departure
-            if (minHour > temp) {
+            if (minHour > temp && fly.getType().equals("Departure")) {
                 minHour = temp;
+                result = fly;
+            }
+        }
+        return result;
+    }
+
+    public Fly earliestDeparture() {
+        Fly result = new Fly("000000", "Arrival", "NoWhere", LocalTime.of(00,00));
+        LocalTime temp = LocalTime.of(23, 59);
+        for (Fly fly : flies) {
+            if (fly.getTime().isBefore(temp) && fly.getType().equals("Departure")) {
+                temp = fly.getTime();
                 result = fly;
             }
         }
