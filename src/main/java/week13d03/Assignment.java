@@ -1,7 +1,5 @@
 package week13d03;
 
-import week13d02.Fly;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
