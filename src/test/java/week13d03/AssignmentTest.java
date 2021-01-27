@@ -20,7 +20,6 @@ class AssignmentTest {
     void lessonsPerTeacherTest() {
         Assignment ass = new Assignment();
         ass.readFromFile();
-        System.out.println();
         assertEquals(18, ass.lessonsPerTeacher("Pulyka Pozsinka"));
         assertEquals(23, ass.lessonsPerTeacher("Poloska Polli"));
     }
