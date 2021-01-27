@@ -17,6 +17,14 @@ class AssignmentTest {
     }
 
     @Test
+    void readFromFileBlockTest() {
+        Assignment ass = new Assignment();
+        ass.readFromFileBlock();
+        System.out.println(ass.getLessons().size());
+        assertEquals("Lesson{teacher='Szarvas Szamanta', subject='informatika', nameOfClass='12.x', lessonPerWeek=2}", ass.getLessons().get(328).toString());
+        assertEquals("Lesson{teacher='Albatrosz Aladin', subject='kemia', nameOfClass='9.a', lessonPerWeek=2}", ass.getLessons().get(1).toString());
+    }
+    @Test
     void lessonsPerTeacherTest() {
         Assignment ass = new Assignment();
         ass.readFromFile();

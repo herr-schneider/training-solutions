@@ -19,11 +19,27 @@ public class Assignment {
             String line2;
             String line3;
             String line4;
-            while ((line1 = bf.readLine()) != null) {
+            while ((line1 = bf.readLine()) != null) { // for átirni optimalizalni
                 line2 = bf.readLine();
                 line3 = bf.readLine();
                 line4 = bf.readLine();
                 lessons.add(new Lesson(line1, line2, line3, Integer.parseInt(line4)));
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            throw new IllegalStateException("File not found");
+        }
+    }
+
+    public void readFromFileBlock() {
+        Path file = Path.of(fileName);
+        try (BufferedReader bf = new BufferedReader(Files.newBufferedReader(file))) {
+            String[] line = new String[4];
+            while ((line[0] = bf.readLine()) != null) {
+                for (int i = 1; i < 4; i++) {
+                    line[i] = bf.readLine();
+                }
+                lessons.add(new Lesson(line[0], line[1], line[2], Integer.parseInt(line[3])));
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
