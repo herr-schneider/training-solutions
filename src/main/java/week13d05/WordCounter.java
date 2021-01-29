@@ -30,7 +30,7 @@ public class WordCounter {
         int result = 0;
         Set<Character> sc = new HashSet<>();
         char[] chars = word.toLowerCase().toCharArray();
-        for (char c = 'a'; c <= 'z'; c++) { //ASCII 97-120
+        for (char c = 'a'; c <= 'z'; c++) {
             for (char charOfstr : chars)
             if (charOfstr == c) {
                 result++;
@@ -40,12 +40,23 @@ public class WordCounter {
         return result;
     }
 
+    public int easyCounter2(String word) {
+        Set<Character> sc = new HashSet<>();
+        char[] chars = word.toLowerCase().toCharArray();
+        for (char charOfstr : chars)
+                if (charOfstr > 'a' && charOfstr < 'z') {
+                   sc.add(charOfstr);
+                }
+        return sc.size();
+        }
+    // halmaz retainALL megnézni halmaz metszet készítés
+
     public int counterInt(String word) {
         int result = 0;
         char c;
         for (int i = 0; i < word.length(); i++) {
             c = word.toLowerCase().charAt(i);
-            if ((c != 32 && c < 48) || c > 58) {
+            if ((c != 32 && c < 48) || c > 58) { //ASCII 97-120
                 result++;
             }
         }

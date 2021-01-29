@@ -13,6 +13,12 @@ class WordCounterTest {
     }
 
     @Test
+    public void easyCounter() {
+        WordCounter wc = new WordCounter();
+        assertEquals(7,wc.easyCounter2("alma egy gyümölcs 120"));
+    }
+
+    @Test
     public void counterToMap() {
         WordCounter wc = new WordCounter();
         System.out.println(wc.counterToMap("alma egy gyümölcs 120"));
