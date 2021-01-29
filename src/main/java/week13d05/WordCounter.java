@@ -28,13 +28,13 @@ public class WordCounter {
 
     public int easyCounter(String word) {
         int result = 0;
-        Set<Character> sc = new HashSet<>();
         char[] chars = word.toLowerCase().toCharArray();
         for (char c = 'a'; c <= 'z'; c++) {
-            for (char charOfstr : chars)
-            if (charOfstr == c) {
-                result++;
-                break;
+            for (char charOfstr : chars) {
+                if (charOfstr == c) {
+                    result++;
+                    break;
+                }
             }
         }
         return result;
@@ -44,11 +44,11 @@ public class WordCounter {
         Set<Character> sc = new HashSet<>();
         char[] chars = word.toLowerCase().toCharArray();
         for (char charOfstr : chars)
-                if (charOfstr > 'a' && charOfstr < 'z') {
-                   sc.add(charOfstr);
-                }
+            if (charOfstr > 'a' && charOfstr < 'z') {
+                sc.add(charOfstr);
+            }
         return sc.size();
-        }
+    }
     // halmaz retainALL megnézni halmaz metszet készítés
 
     public int counterInt(String word) {
