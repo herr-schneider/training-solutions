@@ -5,10 +5,8 @@ package week13d05;
 //        A space-eket, számjegyeket, stb. ne vegye figyelembe! Csak az
 //        angol ábécé betűit!
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class WordCounter {
 
@@ -50,6 +48,20 @@ public class WordCounter {
         return sc.size();
     }
     // halmaz retainALL megnézni halmaz metszet készítés
+
+    public int easyCounterBySet2(String word) {
+        Set<Character> sc = new HashSet<>();
+        char[] chars = word.toLowerCase().toCharArray();
+        for (int i=0; i<chars.length; i++){
+            sc.add(chars[i]);
+        }
+       Character[] charArray = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+                'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+        Set<Character> abc = new HashSet<>(Arrays.asList(charArray));
+        // Set<Character> abc = Arrays.stream(charArray).collect(Collectors.toSet());
+        abc.retainAll(sc);
+        return abc.size();
+    }
 
     public int easyCounterBySet(String word) {
         Set<Character> sc = new HashSet<>();

@@ -19,9 +19,15 @@ class WordCounterTest {
     }
 
     @Test
-    public void counterByRetainALL() {
+    public void counterByRetainAll() {
         WordCounter wc = new WordCounter();
         assertEquals(8,wc.easyCounterBySet("alma egy gyümölcs 120"));
+    }
+
+    @Test
+    public void counterByRetainAll2() {
+        WordCounter wc = new WordCounter();
+        assertEquals(8,wc.easyCounterBySet2("alma egy gyümölcs 120"));
     }
 
     @Test
