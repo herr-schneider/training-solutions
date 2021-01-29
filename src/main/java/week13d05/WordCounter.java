@@ -40,7 +40,7 @@ public class WordCounter {
         return result;
     }
 
-    public int easyCounter2(String word) {
+    public int easyCounter2(String word) { // ige legyen a metodus név
         Set<Character> sc = new HashSet<>();
         char[] chars = word.toLowerCase().toCharArray();
         for (char charOfstr : chars)
