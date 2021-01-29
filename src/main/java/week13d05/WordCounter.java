@@ -6,7 +6,7 @@ package week13d05;
 //        angol ábécé betűit!
 
 import java.util.*;
-import java.util.stream.Collectors;
+//import java.util.stream.Collectors;
 
 public class WordCounter {
 
@@ -82,7 +82,7 @@ public class WordCounter {
         char c;
         for (int i = 0; i < word.length(); i++) {
             c = word.toLowerCase().charAt(i); // nem jó, ugyanazt többször is megszámolja
-            if (c < 120 || c > 97) {
+            if (c < 120 && c > 97) {
                 result++;
             }
         }
