@@ -55,8 +55,8 @@ public class WordCounter {
         int result = 0;
         char c;
         for (int i = 0; i < word.length(); i++) {
-            c = word.toLowerCase().charAt(i);
-            if ((c != 32 && c < 48) || c > 58) { //ASCII 97-120
+            c = word.toLowerCase().charAt(i); // nem jó, ugyanazt többször is megszámolja
+            if (c < 120 || c > 97) {
                 result++;
             }
         }
