@@ -44,12 +44,26 @@ public class WordCounter {
         Set<Character> sc = new HashSet<>();
         char[] chars = word.toLowerCase().toCharArray();
         for (char charOfstr : chars)
-            if (charOfstr > 'a' && charOfstr < 'z') {
+            if (charOfstr >= 'a' && charOfstr <= 'z') {
                 sc.add(charOfstr);
             }
         return sc.size();
     }
     // halmaz retainALL megnézni halmaz metszet készítés
+
+    public int easyCounterBySet(String word) {
+        Set<Character> sc = new HashSet<>();
+        char[] chars = word.toLowerCase().toCharArray();
+        for (int i=0; i<chars.length; i++){
+            sc.add(chars[i]);
+        }
+        Set<Character> abc = new HashSet<>();
+        for (char c = 'a'; c <= 'z'; c++) {
+            abc.add(c);
+        }
+        abc.retainAll(sc);
+        return abc.size();
+    }
 
     public int counterInt(String word) {
         int result = 0;
@@ -67,10 +81,27 @@ public class WordCounter {
         Map<Character, Integer> result = new HashMap<>();
         for (int i = 0; i < word.length(); i++) {
             char c = word.toLowerCase().charAt(i);
+
             if (result.containsKey(c)) {
                 result.put(c, result.get(c) + 1);
             } else {
                 result.put(c, 1);
+            }
+
+        }
+        return result;
+    }
+
+    public Map<Character, Integer> counterToMapEnlish(String word) {
+        Map<Character, Integer> result = new HashMap<>();
+        for (int i = 0; i < word.length(); i++) {
+            char c = word.toLowerCase().charAt(i);
+            if (c >= 'a' && c <= 'z') {
+                if (result.containsKey(c)) {
+                    result.put(c, result.get(c) + 1);
+                } else {
+                    result.put(c, 1);
+                }
             }
         }
         return result;
