@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Book {
     private final int regNumber;
     private final String title;
+    String author;
 
     @Override
     public boolean equals(Object o) {
@@ -18,8 +19,6 @@ public class Book {
     public int hashCode() {
         return Objects.hash(regNumber);
     }
-
-    private final String author;
 
     public Book(int regNumber, String title, String author) {
         this.regNumber = regNumber;
@@ -38,4 +37,5 @@ public class Book {
     public String getAuthor() {
         return author;
     }
+
 }
