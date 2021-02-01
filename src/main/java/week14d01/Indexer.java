@@ -26,8 +26,21 @@ public class Indexer {
             if (!result.containsKey(initial)) {
                 result.put(initial, new HashSet<>());
             }
-                result.get(initial).add(str);
+            result.get(initial).add(str);
+        }
+
+        return result;
+    }
+
+    public Map<Character, List<String>> indexerList(List<String> names) {
+        Map<Character, List<String>> result = new HashMap<>();
+        for (String str : names) {
+            char initial = str.charAt(0);
+            if (!result.containsKey(initial)) {
+                result.put(initial, new ArrayList<>());
             }
+            result.get(initial).add(str);
+        }
 
         return result;
     }
@@ -36,5 +49,6 @@ public class Indexer {
         Indexer indexer = new Indexer();
         System.out.println(indexer.index(Arrays.asList("Odon", "Lujza", "Lajos", "Abraham", "Magdolna")));
         System.out.println(indexer.indexer(Arrays.asList("Odon", "Lujza", "Lajos", "Abraham", "Magdolna")));
+        System.out.println(indexer.indexerList(Arrays.asList("Odon", "Lujza", "Lajos", "Abraham", "Magdolna")));
     }
 }
