@@ -26,62 +26,57 @@ public class Shopping {
 //            3. Adjuk vissza egy vásárlási azonosító alapján, hogy hány termék szerepel a vásárlásban.
 //            4. Készíts statisztikát melyben visszaadod, hogy az egyes termékek hányszor szerepelnek a fájlban.
 
-    Map<String, List<String>> result = new HashMap<>();
+//
+        private Map<String, TreeSet<String>> ordersMap = new HashMap<>();
 
-    public void readFromFile(Path file) {
-        String line;
-        try (BufferedReader bf = new BufferedReader(Files.newBufferedReader(file))) {
-            while ((line = bf.readLine()) != null) {
-                String[] words = line.split(" ");
-                String key = words[0];
-                String[] value = words[1].split(",");
-                List<String> products = new ArrayList<>();
-                for (String str : value) {
-                    products.add(str);
+        public void readFiles(String file) {
+             try (BufferedReader reader = new BufferedReader(Files.newBufferedReader(Path.of(file)))) {
+
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] splitLine = line.split(" ");
+                    TreeSet<String> products = new TreeSet<>();
+                    Collections.addAll(products, splitLine[1].split(","));
+                    ordersMap.put(splitLine[0], products);
                 }
-                Collections.sort(products);
-                index(key, products);
+            } catch (IOException ioe) {
+                throw new IllegalStateException("Can not read file!", ioe);
             }
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-            throw new IllegalStateException("File not found");
         }
-    }
 
-    public int iterateUsingEntrySet(String pr) {
-        int numberOfProduct = 0;
-        for (Map.Entry<String, List<String>> entry : result.entrySet()) {
-            for (String product : entry.getValue()){
-                if (pr.equals(product)){
-                    numberOfProduct++;
+        public TreeSet<String> getProductsOrdersById(String id) {
+            return ordersMap.get(id);
+        }
+
+        public Map<String, Integer> getProductsMap() {
+            Map<String, Integer> productsMap = new HashMap<>();
+            for (TreeSet<String> set : ordersMap.values()) {
+                for (String item : set) {
+                    if (!productsMap.containsKey(item)) {
+                        productsMap.put(item, 1);
+                    } else {
+                        productsMap.put(item, productsMap.get(item) + 1);
+                    }
                 }
             }
+            return productsMap;
         }
-        return numberOfProduct;
-    }
 
-   public List<ProdStat> fourth(){
-        List<ProdStat> list = new ArrayList<>();
-        for (result.entrySet().)
-        return list;
-   }
-
-    public Map<String, List<String>> index(String key, List<String> names) {
-        for (String str : names) {
-            if (!result.containsKey(key)) {
-                result.put(key, new ArrayList<>());
-            }
-            result.get(key).add(str);
+        public int getNumberOfOrderedProducts(String product) {
+            return getProductsMap().get(product);
         }
-        return result;
-    }
 
-    public int numberOfProduct(String key) {
-        for (Map.Entry<String, List<String>> entry : result.entrySet()) {
-            if (entry.getKey().equals(key)) {
-                return entry.getValue().size();
-            }
+        public int getNumberByOderedId(String id) {
+            return getProductsOrdersById(id).size();
         }
-        throw new IllegalArgumentException("Ez most nem jött össze!");
+
+        public static void main(String[] args) {
+            Shopping orders = new Shopping();
+            orders.readFiles("src/main/java/week14d02/shoppingtour.txt");
+            System.out.println(orders.ordersMap);
+            System.out.println(orders.getProductsOrdersById("A10")); //1.
+            System.out.println(orders.getNumberOfOrderedProducts("beer")); //2.
+            System.out.println(orders.getNumberByOderedId("A10")); //3.
+            System.out.println(orders.getProductsMap()); //4.
+        }
     }
-}
