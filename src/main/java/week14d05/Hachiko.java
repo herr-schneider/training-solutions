@@ -1,7 +1,5 @@
 package week14d05;
 
-import collectionsiterator.Book;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -17,6 +15,9 @@ public class Hachiko {
 
     public Map<String, Integer> countWords(String fileName, String word, String... words) {
         Path file = Path.of(fileName);
+        if (fileName == null || word == null){
+            throw new IllegalArgumentException("Nem lehet üres parameter!");
+        }
         Map<String, Integer> results = new HashMap<>();
         results.put(word, 0);
         for (String wordFromArray : words) {
@@ -33,7 +34,7 @@ public class Hachiko {
                 }
             }
         } catch (IOException ioe) {
-            throw new IllegalArgumentException("File not found, ioe");
+            throw new IllegalArgumentException("File not found", ioe);
         }
         return results;
     }
