@@ -14,10 +14,10 @@ public class Hachiko {
     final Charset utf8 = StandardCharsets.UTF_8;
 
     public Map<String, Integer> countWords(String fileName, String word, String... words) {
-        Path file = Path.of(fileName);
-        if (fileName == null || word == null){
+        if (fileName == null || word == null || words.length < 1){
             throw new IllegalArgumentException("Nem lehet üres parameter!");
         }
+        Path file = Path.of(fileName);
         Map<String, Integer> results = new HashMap<>();
         results.put(word, 0);
         for (String wordFromArray : words) {
