@@ -40,7 +40,7 @@ public class LibraryManager {
         Set<Book> resultBooks = new HashSet<>();
         for (Iterator<Book> i = libraryBooks.iterator(); i.hasNext(); ) {
             Book value = i.next();
-            if (value.getAuthor() == author) {
+            if (value.getAuthor().equals(author)) {
                 resultBooks.add(value);
             }
         }
