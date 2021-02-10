@@ -9,6 +9,13 @@ public class Post {
         private String content;
         private String owner;
 
+    public Post(String title, LocalDate publishedAt, String content, String owner) {
+        this.title = title;
+        this.publishedAt = publishedAt;
+        this.content = content;
+        this.owner = owner;
+    }
+
     public String getTitle() {
         return title;
     }
