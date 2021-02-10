@@ -6,7 +6,15 @@ import java.util.List;
 
 public class PostFinder {
 
-    List<Post> posts = new ArrayList<>();
+    private List<Post> posts = new ArrayList<>();
+
+    public PostFinder(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public void addPost(Post newOne){
+        posts.add(newOne);
+    }
 
     public List<Post> findPostsFor(String user) {
         List<Post> result = new ArrayList<>();
