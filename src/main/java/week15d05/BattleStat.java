@@ -22,6 +22,7 @@ public class BattleStat {
         Map<String, Integer> cases = new TreeMap<>();
         try (BufferedReader bf = Files.newBufferedReader(file, utf8)) {
             String line;
+            bf.readLine();
             while ((line = bf.readLine()) != null) {
                 String[] temp = line.split(",");
                 for (int i = 5; i < 13; i++) {
@@ -35,11 +36,12 @@ public class BattleStat {
         } catch (IOException ioe) {
             throw new IllegalArgumentException("File not found", ioe);
         }
+
         return cases;
     }
 
     public static void main(String[] args) {
         BattleStat bt = new BattleStat();
-        bt.readFile();
+        System.out.println(bt.readFile());
     }
 }
