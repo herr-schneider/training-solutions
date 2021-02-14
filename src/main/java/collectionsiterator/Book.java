@@ -2,10 +2,10 @@ package collectionsiterator;
 
 import java.util.Objects;
 
-public class Book {
+public class Book implements Comparable<Book>{
     private final int regNumber;
     private final String title;
-    String author;
+    private String author;
 
     @Override
     public boolean equals(Object o) {
@@ -24,6 +24,11 @@ public class Book {
         this.regNumber = regNumber;
         this.title = title;
         this.author = author;
+    }
+
+    @Override
+    public int compareTo(Book o) {
+        return o.author.compareTo(this.author);
     }
 
     public int getRegNumber() {
