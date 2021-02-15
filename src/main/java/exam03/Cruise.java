@@ -27,9 +27,9 @@ public class Cruise {
         return passenger.getCruiseClass().getValue();
     }
 
-    public Passenger findPassengerByName(Passenger passenger) {
+    public Passenger findPassengerByName(String passenger) {
         for (Passenger searched : passengers) {
-            if (searched.getName().equals(passenger.getName())) {
+            if (searched.getName().equals(passenger)) {
                 return searched;
             }
         }
