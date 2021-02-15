@@ -1,10 +1,7 @@
 package exam03;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Cruise {
     private Boat boat;
@@ -43,8 +40,21 @@ public class Cruise {
         List<String> result = new ArrayList<>();
         for (Passenger searched : passengers) {
             result.add(searched.getName());
-            }
+        }
         Collections.sort(result);
+        return result;
+    }
+
+    public Map<CruiseClass, Integer> countPassengerByClass() {
+        Map<CruiseClass, Integer> result = new HashMap<>();
+        for (Passenger searched : passengers) {
+
+            if (!result.containsKey(searched.getCruiseClass())) {
+                result.put(searched.getCruiseClass(), 1);
+            } else {
+                result.replace(searched.getCruiseClass(), result.get(searched.getCruiseClass()) + 1);
+            }
+        }
         return result;
     }
 
@@ -56,7 +66,6 @@ public class Cruise {
 
         return sum;
     }
-
 
 
     public Boat getBoat() {
