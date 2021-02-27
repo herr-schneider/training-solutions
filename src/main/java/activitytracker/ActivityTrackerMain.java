@@ -22,9 +22,10 @@ public class ActivityTrackerMain {
     public static void main(String[] args) {
         ActivityTrackerMain act = new ActivityTrackerMain();
         act.readProperties();
-        MariaDbDataSource dataSource = act.initDB();
-        //act.insertALine(dataSource, LocalDateTime.now(), "valami", "BASKETBALL"));
-        act.selectALine(dataSource, 7);
+        // MariaDbDataSource dataSource = act.initDB();
+        // act.insertALine(dataSource, LocalDateTime.now(), "valami", "BASKETBALL"));
+        // act.selectALine(dataSource, 7);
+        System.out.println(act.saveActivity(new Activity(LocalDateTime.now(),"Jozsi",ActivityType.RUNNING)));
         //System.out.println(act.selectAllLine(act.initDB()));
     }
 
@@ -47,9 +48,59 @@ public class ActivityTrackerMain {
         }
     }
 
-    public void saveActivity(Activity){}
-    public Activity findActivityById(long id){}
-    public List<Activity> listActivities(){}
+    public void saveActivityOld(Activity activity){
+        readProperties();
+        insertALine(initDB(),activity.getStartTime(), activity.getDesc(), activity.getActivityType().name());
+    }
+
+    public Activity saveActivity(Activity activity){
+        readProperties();
+        MariaDbDataSource dataSource = initDB();
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(
+                     "insert into activities (start_time, activity_desc, activity_type) values (?, ?, ?)",
+                     Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setTimestamp(1, Timestamp.valueOf(activity.getStartTime()));
+            stmt.setString(2, activity.getDesc());
+            stmt.setString(3, activity.getActivityType().name());
+            stmt.executeUpdate();
+            try (ResultSet rs = stmt.getGeneratedKeys()){
+                if (rs.next()){
+                    return new Activity(rs.getInt("id"),
+                            activity.getStartTime(),
+                            activity.getDesc(),
+                            activity.getActivityType());
+                } else {throw new IllegalStateException("No generated key!");}
+            }
+        } catch (SQLException sqle) {
+            throw new IllegalStateException("Cannot query", sqle);
+        }
+    }
+
+    public Activity findActivityById(long id){
+        readProperties();
+        return selectALine(initDB(), id);
+    }
+
+    public List<Activity> listActivities(){
+        readProperties();
+        MariaDbDataSource dataSource = initDB();
+        List<Activity> result = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select * from activities")
+        ) {
+            while (rs.next()) {
+                result.add(new Activity(
+                        rs.getTimestamp("start_time").toLocalDateTime(),
+                        rs.getString("activity_desc"),
+                        ActivityType.valueOf(rs.getString("activity_type"))));
+            }
+        } catch (SQLException sqle) {
+            throw new IllegalStateException("Cannot query", sqle);
+        }
+        return result;
+    }
 
     public List<String> selectAllLine(MariaDbDataSource dataSource) {
         List<String> result = new ArrayList<>();
