@@ -23,22 +23,33 @@ public class ActivityTrackerMain {
         ActivityTrackerMain act = new ActivityTrackerMain();
         act.readProperties();
         MariaDbDataSource dataSource = act.initDB();
-        //act.insertALine(dataSource, LocalDateTime.now(), "valami", "HIKING");
-        act.selectALine(dataSource, 2);
-        System.out.println(act.selectAllLine(act.initDB()));
+        //act.insertALine(dataSource, LocalDateTime.now(), "valami", "BASKETBALL"));
+        act.selectALine(dataSource, 7);
+        //System.out.println(act.selectAllLine(act.initDB()));
     }
 
-    public void insertALine(MariaDbDataSource dataSource, LocalDateTime start, String act, String act_type) {
+    public long insertALine(MariaDbDataSource dataSource, LocalDateTime startTime, String act, String act_type) {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
-                     "insert into activities (activity_desc, activity_type) values (?, ?)")) {
-            stmt.setString(1, act);
-            stmt.setString(2, act_type);
+                     "insert into activities (start_time, activity_desc, activity_type) values (?, ?, ?)",
+                     Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setTimestamp(1, Timestamp.valueOf(startTime));
+            stmt.setString(2, act);
+            stmt.setString(3, act_type);
             stmt.executeUpdate();
+            try (ResultSet rs = stmt.getGeneratedKeys()){
+                if (rs.next()){
+                 return  rs.getLong("id");
+                } else {throw new IllegalStateException("No generated key!");}
+            }
         } catch (SQLException sqle) {
             throw new IllegalStateException("Cannot query", sqle);
         }
     }
+
+    public void saveActivity(Activity){}
+    public Activity findActivityById(long id){}
+    public List<Activity> listActivities(){}
 
     public List<String> selectAllLine(MariaDbDataSource dataSource) {
         List<String> result = new ArrayList<>();
@@ -57,10 +68,10 @@ public class ActivityTrackerMain {
         return result;
     }
 
-    public void selectALine(MariaDbDataSource dataSource, long index) {
+    public Activity selectALine(MariaDbDataSource dataSource, long index) {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
-                     "select activity_desc from activities where id = ?")
+                     "select * from activities where id = ?")
         ) {
 
             stmt.setLong(1, index);
@@ -69,6 +80,10 @@ public class ActivityTrackerMain {
                 if (rs.next()) {
                     String name = rs.getString("activity_desc");
                     System.out.println(name);
+                    return new Activity(
+                            rs.getTimestamp("start_time").toLocalDateTime(),
+                            rs.getString("activity_desc"),
+                            ActivityType.valueOf(rs.getString("activity_type")));
                 }
             } catch (SQLException sqle) {
                 throw new IllegalStateException("Cannot query", sqle);
@@ -76,6 +91,7 @@ public class ActivityTrackerMain {
         } catch (SQLException sqle) {
             throw new IllegalStateException("Cannot query", sqle);
         }
+        throw new IllegalStateException("There is no" + "line");
     }
 
     public MariaDbDataSource initDB() {
