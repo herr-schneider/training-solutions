@@ -6,12 +6,15 @@ public class TrackPoint {
     private long id;
     private LocalDate time;
     private double lat;
-    private double lod;
+    private double lon;
 
-    public TrackPoint(LocalDate time, double lat, double lod) {
+    public TrackPoint(LocalDate time, double lat, double lon) {
+        if (lat < -90 || lat > 90 || lon < -180 || lon > 180) {
+            throw new IllegalArgumentException("Invalid parameter");
+        }
         this.time = time;
         this.lat = lat;
-        this.lod = lod;
+        this.lon = lon;
     }
 
     public long getId() {
@@ -26,8 +29,8 @@ public class TrackPoint {
         return lat;
     }
 
-    public double getLod() {
-        return lod;
+    public double getLon() {
+        return lon;
     }
 
     @Override
@@ -36,7 +39,7 @@ public class TrackPoint {
                 "id=" + id +
                 ", time=" + time +
                 ", lat=" + lat +
-                ", lod=" + lod +
+                ", lod=" + lon +
                 '}';
     }
 }
