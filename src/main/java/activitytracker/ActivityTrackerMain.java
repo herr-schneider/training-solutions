@@ -196,6 +196,31 @@ public class ActivityTrackerMain {
         }
     }
 
+    public List<Activity> selectActivitiesByType(ActivityType activityType) {
+        MariaDbDataSource dataSource = initDB();
+        List<Activity> result = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(
+                     "select * from activities where activity_type = ?")
+        ) {
+            stmt.setString(1, activityType.name());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    result.add(
+                            new Activity(
+                                    rs.getTimestamp("start_time").toLocalDateTime(),
+                                    rs.getString("activity_desc"),
+                                    ActivityType.valueOf(rs.getString("activity_type"))));
+                }
+                return result;
+            } catch (SQLException sqle) {
+                throw new IllegalStateException("Cannot query", sqle);
+            }
+        } catch (SQLException sqle) {
+            throw new IllegalStateException("Cannot query", sqle);
+        }
+    }
 
     public Activity selectALine(MariaDbDataSource dataSource, long index) {
         try (Connection conn = dataSource.getConnection();
