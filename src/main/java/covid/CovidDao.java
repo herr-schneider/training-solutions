@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -54,6 +55,7 @@ public class CovidDao {
             smtm.setInt(3, age);
             smtm.setString(4, email);
             smtm.setString(5, taj);
+            smtm.executeUpdate();
         } catch (SQLException sqle) {
             throw new IllegalStateException("");
         }
@@ -106,6 +108,7 @@ public class CovidDao {
                     smtm.setInt(3, Integer.valueOf(tags[2]));
                     smtm.setString(4, tags[3]);
                     smtm.setString(5, tags[4]);
+                    smtm.executeUpdate();
                 }
             } catch (IllegalArgumentException ia) {
                 conn.rollback();
@@ -127,6 +130,42 @@ public class CovidDao {
         return temp;
     }
 
+
+    public void giveVaccine(String taj, LocalDate date, String status, String note) {
+        if (!isValidCDV(taj)) {
+            throw new IllegalArgumentException("TAJ is not valid!");
+        }
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement smtm = conn.prepareStatement(
+                     "insert into vaccinations(citizen_id, vaccination_date, status, note) values (?, ?, ?, ?)")
+        ) {
+            smtm.setString(1, nameToGiveVaccine(taj));
+            smtm.setDate(2, Date.valueOf(date));
+            smtm.setString(3, status);
+            smtm.setString(4, note);
+            smtm.executeUpdate();
+        } catch (SQLException sqle) {
+            throw new IllegalStateException("");
+        }
+    }
+
+    public String nameToGiveVaccine(String taj) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(
+                     "SELECT citizen_name FROM citizens " +
+                             "WHERE taj = ?");
+             ResultSet rs = stmt.executeQuery()) {
+
+            stmt.setString(1, taj);
+            if (rs.next()) {
+                return rs.getString("citizen_name");
+            }
+        } catch (SQLException sqle) {
+            throw new IllegalStateException("SQL error!");
+        }
+        return "Unknows paraszt!";
+    }
+
     public void readvaccinatable(Path outputFile) {
         try (BufferedWriter writer = new BufferedWriter(Files.newBufferedWriter(outputFile));
              Connection conn = dataSource.getConnection();
@@ -135,7 +174,12 @@ public class CovidDao {
                              "zip, " +
                              "age, " +
                              "email, " +
-                             "taj FROM citizens WHERE last_vaccination < ? ORDER BY age, citizen_name;")) {
+                             "taj " +
+                             "FROM citizens " +
+                             "WHERE (last_vaccination < ?) AND " +
+                             "(num_of_vacc < 2) " +
+                             "ORDER BY age, citizen_name " +
+                             "LIMIT 16;")) {
 //             Statement stmt = conn.createStatement();
 //             ResultSet rs = stmt.executeQuery("SELECT citizen_name, zip, age, email, taj FROM citizens WHERE last_vaccination < '2021.09.30' ORDER BY age, citizen_name;")) {
 //             stmt.setString(1,"2021.09.30");
@@ -143,13 +187,16 @@ public class CovidDao {
 
             ResultSet rs = stmt.executeQuery();
             Citizen citizen = new Citizen();
+            LocalTime time = LocalTime.of(8, 00);
             while (rs.next()) {
+                citizen.setTime(time);
                 citizen.setCitizen_name(rs.getString("citizen_name"));
                 citizen.setEmail(rs.getString("email"));
                 citizen.setTaj(rs.getString("taj"));
                 citizen.setZip(rs.getInt("zip"));
                 citizen.setAge(rs.getInt("age"));
                 writer.write(citizen.toString());
+                time = time.plusMinutes(30);
             }
         } catch (SQLException sqle) {
             throw new IllegalStateException("SQL problem!" + sqle);
@@ -216,5 +263,4 @@ public class CovidDao {
             throw new IllegalArgumentException("File not found");
         }
     }
-
 }

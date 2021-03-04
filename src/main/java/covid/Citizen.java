@@ -1,6 +1,9 @@
 package covid;
 
+import java.time.LocalTime;
+
 public class Citizen {
+    private LocalTime time;
     private String citizen_name;
     private int zip;
     private int age;
@@ -8,6 +11,10 @@ public class Citizen {
     private String taj;
 
     public Citizen() {
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 
     public void setCitizen_name(String citizen_name) {
@@ -32,7 +39,8 @@ public class Citizen {
 
     @Override
     public String toString() {
-        return citizen_name + ';' +
+        return time.toString() + ';' +
+                citizen_name + ';' +
                 zip + ';' +
                 age + ';' +
                 email + ';' +
