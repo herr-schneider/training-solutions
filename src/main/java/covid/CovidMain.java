@@ -10,27 +10,33 @@ public class CovidMain {
     public static void main(String[] args) {
         CovidDao dao = new CovidDao();
         CovidMain main = new CovidMain();
-        int answer = main.menuDrawer();
-        switch (answer) {
-            case 1:
-                break;
-            case 2:
-                dao.readvaccinatable(Path.of("src/main/java/activitytracker/vacc.csv"));
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            default:
-                System.out.println("Nem jó");
+        int answer = 0;
+        while (answer != 7) {
+            answer = main.mainMenu();
+            switch (answer) {
+                case 1:
+                    main.singleReg();
+                    break;
+                case 2:
+                    dao.readvaccinatable(Path.of("src/main/java/activitytracker/vacc.csv"));
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 7:
+                    break;
+                default:
+                    System.out.println("Nem jó");
+            }
         }
 
 
     }
 
-    private int menuDrawer() {
+    private int mainMenu() {
         try (Scanner scanner = new Scanner(Path.of("src/main/java/covid/menu.csv"))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -40,11 +46,31 @@ public class CovidMain {
             throw new IllegalStateException("Cannot read file", ioe);
         }
         Scanner answerScanner = new Scanner(System.in);
-        System.out.println("What do you want?");
+        System.out.println("Válasz a lehetőségek közül:");
         int chosen = answerScanner.nextInt();
+        answerScanner.nextLine();
         return chosen;
     }
 
+    private void singleReg() {
+        CovidDao dao = new CovidDao();
+
+        Scanner answerScanner = new Scanner(System.in);
+        System.out.println("Beteg neve:");
+        String name = answerScanner.nextLine();
+        System.out.println("Posta:");
+        int zip = answerScanner.nextInt();
+        answerScanner.nextLine();
+        System.out.println("Életkor:");
+        int age = answerScanner.nextInt();
+        answerScanner.nextLine();
+        System.out.println("Email:");
+        String email = answerScanner.nextLine();
+        System.out.println("Taj:");
+        String taj = answerScanner.nextLine();
+        dao.writeToDB(name, zip, age, email, taj);
+        System.out.println("Sikeres regisztráció.");
+    }
 
     public int cdvGenerator(String taj) {
         double cdvCode = 0;

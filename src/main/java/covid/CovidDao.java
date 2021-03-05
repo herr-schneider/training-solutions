@@ -23,7 +23,7 @@ public class CovidDao {
     private MariaDbDataSource dataSource = initDB();
     private Path filename = Path.of("src/main/java/covid/massReg.csv");
 
-    private void writeToDB(String name, int zip, int age, String email, String taj) {
+    public void writeToDB(String name, int zip, int age, String email, String taj) {
         if (name.isEmpty() || name.isBlank() || name.length() < 3) {
             throw new IllegalArgumentException("Name is invalid!");
         }
