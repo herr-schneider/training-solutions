@@ -149,6 +149,21 @@ public class CovidDao {
         }
     }
 
+    public void giveVaccineFailed(String taj, String note) {
+        if (!isValidCDV(taj)) {
+            throw new IllegalArgumentException("TAJ is not valid!");
+        }
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement smtm = conn.prepareStatement(
+                     "UPDATE vaccinations SET `status`='failed', note = ? WHERE vaccination_id = 2;")
+        ) {
+            smtm.setString(1, note);
+            smtm.executeUpdate();
+        } catch (SQLException sqle) {
+            throw new IllegalStateException("");
+        }
+    }
+
     public String nameToGiveVaccine(String taj) {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
