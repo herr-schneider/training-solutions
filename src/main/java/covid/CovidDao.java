@@ -137,19 +137,46 @@ public class CovidDao {
         }
         try (Connection conn = dataSource.getConnection();
              PreparedStatement smtm = conn.prepareStatement(
-                     "insert into vaccinations(citizen_id, vaccination_date, status, note) values (?, ?, ?, ?)")
+                     "insert into vaccinations(citizen_id, vaccination_date, status, note) values (?, ?, ?, ?)");
+             PreparedStatement smtm2 = conn.prepareStatement(
+                     "UPDATE citizens SET vaccination_date = ?, " +
+                             "status = ?, " +
+                             "note = ?, " +
+                             "num_of_vacc = ? " +
+                             "WHERE citizen_id = ?");
         ) {
-            smtm.setString(1, nameToGiveVaccine(taj));
+            smtm.setString(1, idToGiveVaccine(taj));
+            smtm2.setString(5, idToGiveVaccine(taj));
             smtm.setDate(2, Date.valueOf(date));
+            smtm2.setDate(1, Date.valueOf(date));
             smtm.setString(3, status);
+            smtm2.setString(2, status);
             smtm.setString(4, note);
+            smtm2.setString(3, note);
+            int numOfvacc = numOfgivenVaccine(taj)+1;
+            smtm2.setInt(4, numOfvacc);
             smtm.executeUpdate();
+            smtm2.executeUpdate();
         } catch (SQLException sqle) {
             throw new IllegalStateException("");
         }
     }
 
-    public void giveVaccineFailed(String taj, String note) {
+    private int numOfgivenVaccine(String taj) throws SQLException{
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(
+                     "SELECT num_of_vacc FROM citizens " +
+                             "WHERE taj = ?");
+             ResultSet rs = stmt.executeQuery()) {
+            stmt.setString(1, taj);
+            if (rs.next()) {
+                return rs.getInt("num_of_vacc");
+            }
+            return 0;
+        }
+    }
+
+    public void givingVaccineFailed(String taj, String note) {
         if (!isValidCDV(taj)) {
             throw new IllegalArgumentException("TAJ is not valid!");
         }
@@ -164,21 +191,19 @@ public class CovidDao {
         }
     }
 
-    public String nameToGiveVaccine(String taj) {
+    public String idToGiveVaccine(String taj) throws SQLException {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
-                     "SELECT citizen_name FROM citizens " +
+                     "SELECT citizen_id FROM citizens " +
                              "WHERE taj = ?");
              ResultSet rs = stmt.executeQuery()) {
 
             stmt.setString(1, taj);
             if (rs.next()) {
-                return rs.getString("citizen_name");
+                return rs.getString("citizen_id");
             }
-        } catch (SQLException sqle) {
-            throw new IllegalStateException("SQL error!");
+            return "Unknows ID!";
         }
-        return "Unknows paraszt!";
     }
 
     public void readvaccinatable(Path outputFile) {
