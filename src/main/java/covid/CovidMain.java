@@ -2,6 +2,7 @@ package covid;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class CovidMain {
@@ -21,12 +22,16 @@ public class CovidMain {
                     dao.readvaccinatable(Path.of("src/main/java/activitytracker/vacc.csv"));
                     break;
                 case 3:
+                    dao.registrationFromCSV();
                     break;
                 case 4:
+                    main.giveVaccine();
                     break;
                 case 5:
+                    main.failedVaccine();
                     break;
-                case 7:
+                case 6:
+                    dao.generateReport();
                     break;
                 default:
                     System.out.println("Nem jó");
@@ -69,6 +74,46 @@ public class CovidMain {
         System.out.println("Taj:");
         String taj = answerScanner.nextLine();
         dao.writeToDB(name, zip, age, email, taj);
+        System.out.println("Sikeres regisztráció.");
+    }
+
+    private void giveVaccine() {
+        CovidDao dao = new CovidDao();
+
+        Scanner answerScanner = new Scanner(System.in);
+        System.out.println("Beteg neve:");
+        String name = answerScanner.nextLine();
+        System.out.println("Posta:");
+        int zip = answerScanner.nextInt();
+        answerScanner.nextLine();
+        System.out.println("Életkor:");
+        int age = answerScanner.nextInt();
+        answerScanner.nextLine();
+        System.out.println("Email:");
+        String email = answerScanner.nextLine();
+        System.out.println("Taj:");
+        String taj = answerScanner.nextLine();
+        System.out.println("Status:");
+        String status = answerScanner.nextLine();
+        System.out.println("Note:");
+        String note = answerScanner.nextLine();
+        System.out.println("Datum (yyyy-mm-dd):");
+        String datum = answerScanner.nextLine();
+        int year = Integer.parseInt(datum.substring(0,3));
+        int month = Integer.parseInt(datum.substring(5,7));
+        int day = Integer.parseInt(datum.substring(8,10));
+        dao.giveVaccine(taj, LocalDate.of(year, month, day), status, note);
+        System.out.println("Sikeres regisztráció.");
+    }
+
+    private void failedVaccine() {
+        CovidDao dao = new CovidDao();
+        Scanner answerScanner = new Scanner(System.in);
+        System.out.println("Taj:");
+        String taj = answerScanner.nextLine();
+        System.out.println("Note:");
+        String note = answerScanner.nextLine();
+        dao.givingVaccineFailed(taj, note);
         System.out.println("Sikeres regisztráció.");
     }
 

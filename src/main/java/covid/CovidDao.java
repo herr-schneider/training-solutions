@@ -145,8 +145,9 @@ public class CovidDao {
                              "num_of_vacc = ? " +
                              "WHERE citizen_id = ?");
         ) {
-            smtm.setString(1, idToGiveVaccine(taj));
-            smtm2.setString(5, idToGiveVaccine(taj));
+            String id = idToGiveVaccine(taj);
+            smtm.setString(1, id);
+            smtm2.setString(5, id);
             smtm.setDate(2, Date.valueOf(date));
             smtm2.setDate(1, Date.valueOf(date));
             smtm.setString(3, status);
@@ -243,6 +244,29 @@ public class CovidDao {
         } catch (IOException ioe) {
             throw new IllegalStateException("File not found!");
         }
+    }
+
+    public void generateReport(){
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery( "SELECT cities.zip AS c_zip, cities.city AS c_city, " +
+                     "(SELECT COUNT(*) FROM citizens WHERE citizens.zip = c_zip AND num_of_vacc = 0) " +
+                     "AS nonvaccinated, " +
+                     "(SELECT COUNT(*) FROM citizens WHERE citizens.zip = c_zip AND num_of_vacc = 1) AS oncevaccinated, " +
+                     "(SELECT COUNT(*) FROM citizens WHERE citizens.zip = c_zip AND num_of_vacc = 2) AS twicevaccinated " +
+                     "FROM citizens JOIN cities ON citizens.zip = cities.zip GROUP BY cities.zip;")) {
+
+            while (rs.next()) {
+                System.out.println(rs.getString("c_zip") + " " +
+                        rs.getString("c_zip") + " " +
+                        rs.getString("nonvaccinated") + " " +
+                        rs.getString("oncevaccinated") + " " +
+                        rs.getString("twicevaccinated"));
+            }
+
+        } catch (SQLException sqle) {
+        throw new IllegalStateException("");
+    }
     }
 
     public MariaDbDataSource initDB() {
