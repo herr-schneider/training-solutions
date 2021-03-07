@@ -1,5 +1,6 @@
 package covid;
 
+import activitytracker.Activity;
 import iowriter.Band;
 import org.mariadb.jdbc.MariaDbDataSource;
 
@@ -130,6 +131,46 @@ public class CovidDao {
         return temp;
     }
 
+    private long getIdAfterExecuted(PreparedStatement stmt) throws SQLException {
+        try (ResultSet rs = stmt.getGeneratedKeys()) {
+            if (rs.next()) {
+                return rs.getLong("id");
+            } else {
+                throw new IllegalStateException("No generated key!");
+            }
+        }
+    }
+
+//    public void interactiveGivingVaccine(String taj, LocalDate date, String status, String note) {
+//        if (!isValidCDV(taj)) {
+//            throw new IllegalArgumentException("TAJ is not valid!");
+//        }
+//        try (Connection conn = dataSource.getConnection();
+//             PreparedStatement smtm = conn.prepareStatement(
+//                     "insert into vaccinations(citizen_id, vaccination_date, status, note) values (?, ?, ?, ?)");
+//             PreparedStatement smtm2 = conn.prepareStatement(
+//                     "UPDATE citizens SET vaccination_date = ?, " +
+//                             "status = ?, " +
+//                             "note = ?, " +
+//                             "num_of_vacc = ? " +
+//                             "WHERE citizen_id = ?", Statement.RETURN_GENERATED_KEYS);
+//        ) {
+//            smtm.setLong(1, getIdAfterExecuted(smtm2));
+//            smtm2.setLong(5, idToGiveVaccine(taj));
+//            smtm.setDate(2, Date.valueOf(date));
+//            smtm2.setDate(1, Date.valueOf(date));
+//            smtm.setString(3, status);
+//            smtm2.setString(2, status);
+//            smtm.setString(4, note);
+//            smtm2.setString(3, note);
+//            int numOfvacc = numOfgivenVaccine(taj) + 1;
+//            smtm2.setInt(4, numOfvacc);
+//            smtm.executeUpdate();
+//            smtm2.executeUpdate();
+//        } catch (SQLException sqle) {
+//            throw new IllegalStateException("");
+//        }
+//    }
 
     public void giveVaccine(String taj, LocalDate date, String status, String note) {
         if (!isValidCDV(taj)) {
@@ -145,16 +186,16 @@ public class CovidDao {
                              "num_of_vacc = ? " +
                              "WHERE citizen_id = ?");
         ) {
-            String id = idToGiveVaccine(taj);
-            smtm.setString(1, id);
-            smtm2.setString(5, id);
+            long id = idToGiveVaccine(taj);
+            smtm.setLong(1, id);
+            smtm2.setLong(5, id);
             smtm.setDate(2, Date.valueOf(date));
             smtm2.setDate(1, Date.valueOf(date));
             smtm.setString(3, status);
             smtm2.setString(2, status);
             smtm.setString(4, note);
             smtm2.setString(3, note);
-            int numOfvacc = numOfgivenVaccine(taj)+1;
+            int numOfvacc = numOfgivenVaccine(taj) + 1;
             smtm2.setInt(4, numOfvacc);
             smtm.executeUpdate();
             smtm2.executeUpdate();
@@ -163,7 +204,7 @@ public class CovidDao {
         }
     }
 
-    private int numOfgivenVaccine(String taj) throws SQLException{
+    private int numOfgivenVaccine(String taj) throws SQLException {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
                      "SELECT num_of_vacc FROM citizens " +
@@ -192,7 +233,7 @@ public class CovidDao {
         }
     }
 
-    public String idToGiveVaccine(String taj) throws SQLException {
+    public long idToGiveVaccine(String taj) throws SQLException {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
                      "SELECT citizen_id FROM citizens " +
@@ -201,9 +242,9 @@ public class CovidDao {
 
             stmt.setString(1, taj);
             if (rs.next()) {
-                return rs.getString("citizen_id");
+                return rs.getLong("citizen_id");
             }
-            return "Unknows ID!";
+            throw new IllegalStateException("No ID!");
         }
     }
 
@@ -246,10 +287,10 @@ public class CovidDao {
         }
     }
 
-    public void generateReport(){
+    public void generateReport() {
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery( "SELECT cities.zip AS c_zip, cities.city AS c_city, " +
+             ResultSet rs = stmt.executeQuery("SELECT cities.zip AS c_zip, cities.city AS c_city, " +
                      "(SELECT COUNT(*) FROM citizens WHERE citizens.zip = c_zip AND num_of_vacc = 0) " +
                      "AS nonvaccinated, " +
                      "(SELECT COUNT(*) FROM citizens WHERE citizens.zip = c_zip AND num_of_vacc = 1) AS oncevaccinated, " +
@@ -265,8 +306,8 @@ public class CovidDao {
             }
 
         } catch (SQLException sqle) {
-        throw new IllegalStateException("");
-    }
+            throw new IllegalStateException("");
+        }
     }
 
     public MariaDbDataSource initDB() {
