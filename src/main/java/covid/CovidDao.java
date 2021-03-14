@@ -172,6 +172,8 @@ public class CovidDao {
 //        }
 //    }
 
+
+
     public void giveVaccine(String taj, LocalDate date, String status, String note) {
         if (!isValidCDV(taj)) {
             throw new IllegalArgumentException("TAJ is not valid!");
